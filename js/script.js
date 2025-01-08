@@ -20,10 +20,15 @@ function toggleSidebar() {
 // 页面加载完成后执行
 document.addEventListener('DOMContentLoaded', () => {
     // 检测设备类型并设置侧栏初始状态
-    if (window.innerWidth <= 768) {
-        document.querySelector('.sidebar').classList.add('collapsed');
-        document.querySelector('.toggle-sidebar').classList.add('collapsed');
-        document.querySelector('.main-content').classList.add('collapsed');
+    const isMobile = window.innerWidth <= 768;
+    const sidebar = document.querySelector('.sidebar');
+    const toggleBtn = document.querySelector('.toggle-sidebar');
+    const mainContent = document.querySelector('.main-content');
+
+    if (isMobile || window.innerWidth <= 1024) {
+        sidebar.classList.add('collapsed');
+        toggleBtn.classList.add('collapsed');
+        mainContent.classList.add('collapsed');
     }
 
     // 自动检测系统主题
@@ -55,4 +60,33 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(sectionId).classList.add('active');
         });
     });
+
+    // 添加窗口大小变化监听
+    window.addEventListener('resize', () => {
+        const currentWidth = window.innerWidth;
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.querySelector('.toggle-sidebar');
+        const mainContent = document.querySelector('.main-content');
+
+        if (currentWidth <= 768) {  // 移动端
+            sidebar.classList.add('collapsed');
+            toggleBtn.classList.add('collapsed');
+            mainContent.classList.add('collapsed');
+        } else if (currentWidth <= 1024) {  // 平板端
+            sidebar.classList.add('collapsed');
+            toggleBtn.classList.add('collapsed');
+            mainContent.classList.add('collapsed');
+        } else {  // 桌面端
+            sidebar.classList.remove('collapsed');
+            toggleBtn.classList.remove('collapsed');
+            mainContent.classList.remove('collapsed');
+        }
+    });
+
+    // 初始检查屏幕宽度
+    if (window.innerWidth <= 1024) {
+        document.querySelector('.sidebar').classList.add('collapsed');
+        document.querySelector('.toggle-sidebar').classList.add('collapsed');
+        document.querySelector('.main-content').classList.add('collapsed');
+    }
 });

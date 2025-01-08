@@ -228,6 +228,10 @@ body {
         padding: 1rem;
     }
 
+    .sidebar.collapsed {
+        display: none; /* 改用display来控制显示/隐藏 */
+    }
+
     .main-content {
         margin-left: 0;
         padding: 1rem;
@@ -266,9 +270,4 @@ body {
     .col-md-4, .col-md-6 {
         padding: 0.5rem;
     }
-}
-
-/* 添加暗色主题下的text-muted样式 */
-[data-theme="dark"] .text-muted {
-    color: var(--muted-color) !important;
 }
