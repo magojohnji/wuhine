@@ -40,7 +40,7 @@ body {
 }
 
 .toggle-sidebar {
-    position: fixed;
+    position: absolute;  /* 改为absolute定位 */
     width: 40px;
     height: 40px;
     z-index: 1001;
@@ -61,12 +61,13 @@ body {
 }
 
 .toggle-sidebar.collapsed {
+    position: fixed;  /* 收起时使用fixed定位 */
     left: 1rem;
     top: 1rem;
 }
 
 .toggle-sidebar:not(.collapsed) {
-    right: 1rem;
+    right: 1rem;     /* 展开时在侧栏右上角 */
     top: 1rem;
     left: auto;
 }
@@ -163,7 +164,7 @@ body {
 .btn-outline-primary:focus,
 .btn-outline-primary:active {
     background-color: var(--link-color) !important;
-    border-color: var(--link-color) !important;
+    border-color: var (--link-color) !important;
     color: #ffffff !important;
     box-shadow: none !important;
 }
