@@ -74,6 +74,8 @@ body {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .profile-image {
@@ -104,6 +106,14 @@ body {
     color: #ffffff;
 }
 
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    background-color: var(--link-color) !important;
+    border-color: var(--link-color) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -122,4 +132,45 @@ body {
     border-top: 1px solid var(--border-color);
     color: var(--text-color);
     font-size: 0.9rem;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .theme-switch {
+        position: static;
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .nav-link {
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+/* 适配移动端的卡片布局 */
+@media (max-width: 576px) {
+    .row {
+        margin: 0;
+    }
+    
+    .col-md-4, .col-md-6 {
+        padding: 0.5rem;
+    }
 }
