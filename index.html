@@ -5,6 +5,7 @@
     <title>江苏省江都中学 2024 级高一（5）班</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <div class="sidebar">
@@ -19,6 +20,7 @@
             <a class="nav-link" href="#quotes" data-section="quotes">教育名言</a>
             <a class="nav-link" href="#moments" data-section="moments">课堂点滴</a>
             <a class="nav-link" href="#memories" data-section="memories">班级纪念</a>
+            <a class="nav-link" href="#class-genius" data-section="class-genius">班级神人</a>
         </div>
     </div>
 
@@ -120,45 +122,20 @@
                 </div>
             </div>
         </div>
+
+        <div class="content-section" id="class-genius">
+            <div class="profile-card animate-fade-in">
+                <h2>班级神人</h2>
+                <p>待添加班级神人相关内容...</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 伍班E站. All rights reserved.</p>
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
-        function toggleTheme() {
-            document.body.dataset.theme = 
-                document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-        }
-
-        // 自动检测系统主题
-        if (window.matchMedia && 
-            window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.body.dataset.theme = 'dark';
-        }
-
-        // 监听系统主题变化
-        window.matchMedia('(prefers-color-scheme: dark)')
-            .addEventListener('change', e => {
-                document.body.dataset.theme = e.matches ? 'dark' : 'light';
-            });
-
-        // 添加选项卡切换功能
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const sectionId = link.dataset.section;
-                
-                // 更新导航激活状态
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                
-                // 切换内容区域
-                document.querySelectorAll('.content-section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                document.getElementById(sectionId).classList.add('active');
-            });
-        });
-    </script>
 </body>
 </html>
