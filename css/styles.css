@@ -41,19 +41,50 @@ body {
 
 .toggle-sidebar {
     position: fixed;
-    left: 250px;
-    top: 1rem;
+    width: 40px;
+    height: 40px;
     z-index: 1001;
     background: var(--sidebar-bg);
     border: 1px solid var(--border-color);
-    border-radius: 0 5px 5px 0;
-    padding: 0.5rem;
+    border-radius: 50%;
     cursor: pointer;
-    transition: left 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.toggle-sidebar:hover {
+    background: var(--card-bg);
 }
 
 .toggle-sidebar.collapsed {
-    left: 0;
+    left: 1rem;
+    top: 1rem;
+}
+
+.toggle-sidebar:not(.collapsed) {
+    right: 1rem;
+    top: 1rem;
+    left: auto;
+}
+
+.toggle-sidebar .fa-bars {
+    display: none;
+}
+
+.toggle-sidebar .fa-times {
+    display: none;
+}
+
+.toggle-sidebar.collapsed .fa-bars {
+    display: block;
+}
+
+.toggle-sidebar:not(.collapsed) .fa-times {
+    display: block;
 }
 
 .main-content {
