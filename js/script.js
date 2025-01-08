@@ -6,8 +6,11 @@ function toggleTheme() {
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const toggleBtn = document.querySelector('.toggle-sidebar');
+    const mainContent = document.querySelector('.main-content');
+    
     sidebar.classList.toggle('collapsed');
     toggleBtn.classList.toggle('collapsed');
+    mainContent.classList.toggle('collapsed');
 }
 
 // 页面加载完成后执行

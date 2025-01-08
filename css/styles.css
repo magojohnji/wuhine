@@ -9,19 +9,23 @@ body {
 }
 
 :root {
-    --bg-color: #fff5e6;  /* 暖米色背景 */
-    --text-color: #4a3f35; /* 深褐色文字 */
-    --sidebar-bg: #f8f9fa;
-    --card-bg: #fffaf0;    /* 浅米色卡片背景 */
-    --link-color: #d4976a; /* 暖棕色链接 */
-    --border-color: #e6d5c3; /* 暖色边框 */
+    --bg-color: #fff5e6;      /* 暖米色背景 */
+    --text-color: #4a3f35;    /* 深褐色文字 */
+    --sidebar-bg: #f8f9fa;    /* 侧栏背景 */
+    --card-bg: #fffaf0;       /* 浅米色卡片背景 */
+    --link-color: #d4976a;    /* 暖棕色链接 */
+    --border-color: #e6d5c3;  /* 暖色边框 */
+    --btn-color: #4a3f35;     /* 按钮颜色 */
 }
 
 [data-theme="dark"] {
-    --bg-color: #1a1a1a;
-    --text-color: #ffffff;
-    --sidebar-bg: #222222;
-    --card-bg: #2d2d2d;
+    --bg-color: #2c2c2c;      /* 深灰背景 */
+    --text-color: #e0e0e0;    /* 浅灰文字 */
+    --sidebar-bg: #363636;    /* 深色侧栏 */
+    --card-bg: #404040;       /* 卡片背景 */
+    --link-color: #e6b17f;    /* 明亮的暖橙色 */
+    --border-color: #505050;  /* 深色边框 */
+    --btn-color: #e0e0e0;     /* 按钮颜色 */
 }
 
 .sidebar {
@@ -40,9 +44,9 @@ body {
 }
 
 .toggle-sidebar {
-    position: absolute;  /* 改为absolute定位 */
-    width: 40px;
-    height: 40px;
+    position: fixed;
+    width: 45px;
+    height: 45px;
     z-index: 1001;
     background: var(--sidebar-bg);
     border: 1px solid var(--border-color);
@@ -52,24 +56,25 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 1.4rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    color: var(--btn-color);
 }
 
 .toggle-sidebar:hover {
     background: var(--card-bg);
+    transform: scale(1.1);
 }
 
 .toggle-sidebar.collapsed {
-    position: fixed;  /* 收起时使用fixed定位 */
-    left: 1rem;
-    top: 1rem;
+    left: 1.5rem;
+    top: 1.5rem;
 }
 
 .toggle-sidebar:not(.collapsed) {
-    right: 1rem;     /* 展开时在侧栏右上角 */
+    position: absolute;
+    right: 1rem;
     top: 1rem;
-    left: auto;
 }
 
 .toggle-sidebar .fa-bars {
@@ -92,6 +97,11 @@ body {
     flex: 1;
     padding: 2rem;
     margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content.collapsed {
+    margin-left: 0;
 }
 
 .nav-link {
@@ -164,7 +174,7 @@ body {
 .btn-outline-primary:focus,
 .btn-outline-primary:active {
     background-color: var(--link-color) !important;
-    border-color: var (--link-color) !important;
+    border-color: var(--link-color) !important;
     color: #ffffff !important;
     box-shadow: none !important;
 }
