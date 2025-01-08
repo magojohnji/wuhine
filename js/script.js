@@ -3,6 +3,13 @@ function toggleTheme() {
         document.body.dataset.theme === 'dark' ? 'light' : 'dark';
 }
 
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const toggleBtn = document.querySelector('.toggle-sidebar');
+    sidebar.classList.toggle('collapsed');
+    toggleBtn.classList.toggle('collapsed');
+}
+
 // 页面加载完成后执行
 document.addEventListener('DOMContentLoaded', () => {
     // 自动检测系统主题
@@ -34,4 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(sectionId).classList.add('active');
         });
     });
+
+    // 添加侧栏自动收起功能
+    setTimeout(() => {
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.querySelector('.toggle-sidebar');
+        sidebar.classList.add('collapsed');
+        toggleBtn.classList.add('collapsed');
+    }, 5000);
 });

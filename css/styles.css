@@ -31,6 +31,29 @@ body {
     position: fixed;
     height: 100vh;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-250px);
+}
+
+.toggle-sidebar {
+    position: fixed;
+    left: 250px;
+    top: 1rem;
+    z-index: 1001;
+    background: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0 5px 5px 0;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: left 0.3s ease-in-out;
+}
+
+.toggle-sidebar.collapsed {
+    left: 0;
 }
 
 .main-content {
@@ -161,6 +184,14 @@ body {
 
     .nav-link {
         padding: 0.25rem 0.5rem;
+    }
+
+    .toggle-sidebar {
+        display: none;
+    }
+    
+    .sidebar.collapsed {
+        transform: none;
     }
 }
 
