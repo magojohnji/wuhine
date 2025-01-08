@@ -44,7 +44,7 @@ body {
 }
 
 .toggle-sidebar {
-    position: fixed;  /* 改为固定定位 */
+    position: absolute;
     width: 45px;
     height: 45px;
     z-index: 1001;
@@ -59,8 +59,6 @@ body {
     font-size: 1.4rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     color: var(--btn-color);
-    left: 1.5rem;  /* 默认位置 */
-    top: 1.5rem;
 }
 
 .toggle-sidebar:hover {
@@ -75,18 +73,22 @@ body {
 }
 
 .toggle-sidebar:not(.collapsed) {
-    left: auto;  /* 取消左侧定位 */
-    right: 1rem;  /* 设置右侧定位 */
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
 }
 
 /* 修改图标显示逻辑 */
 .toggle-sidebar i {
+    position: absolute;
     transition: opacity 0.3s ease-in-out;
 }
 
-.toggle-sidebar .fa-bars,
+.toggle-sidebar .fa-bars {
+    opacity: 0;
+}
+
 .toggle-sidebar .fa-times {
-    position: absolute;
     opacity: 0;
 }
 
