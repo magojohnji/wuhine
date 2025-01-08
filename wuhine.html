@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吴海燕 - 英语教师简介</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --card-bg: #2d2d2d;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switch">
+        <button class="btn btn-outline-primary" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i> 切换主题
+        </button>
+    </div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="profile-card animate-fade-in">
+                    <div class="text-center">
+                        <img src="https://via.placeholder.com/200" alt="吴海燕老师" class="profile-image">
+                        <h1 class="display-4 mb-3">吴海燕</h1>
+                        <p class="lead mb-4">资深英语教师</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <h2 class="h4 mb-3">教育背景</h2>
+                        <p>英语教育学士学位 | XX大学</p>
+
+                        <h2 class="h4 mb-3 mt-4">教学经验</h2>
+                        <ul>
+                            <li>超过10年的英语教学经验</li>
+                            <li>专注于高中英语教学</li>
+                            <li>多名学生在各类英语竞赛中获奖</li>
+                        </ul>
+
+                        <h2 class="h4 mb-3 mt-4">教学特色</h2>
+                        <p>采用互动式教学方法，注重培养学生的实际应用能力。通过个性化的教学策略，帮助学生建立学习信心，激发学习兴趣。</p>
+
+                        <h2 class="h4 mb-3 mt-4">获奖荣誉</h2>
+                        <ul>
+                            <li>优秀教师奖</li>
+                            <li>教学创新奖</li>
+                            <li>最受学生欢迎教师</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        function toggleTheme() {
+            document.body.dataset.theme = 
+                document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+        }
+
+        // 自动检测系统主题
+        if (window.matchMedia && 
+            window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.dataset.theme = 'dark';
+        }
+
+        // 监听系统主题变化
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change', e => {
+                document.body.dataset.theme = e.matches ? 'dark' : 'light';
+            });
+    </script>
+</body>
+</html>
