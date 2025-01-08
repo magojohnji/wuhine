@@ -9,15 +9,19 @@ body {
 }
 
 :root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
+    --bg-color: #fff5e6;  /* 暖米色背景 */
+    --text-color: #4a3f35; /* 深褐色文字 */
     --sidebar-bg: #f8f9fa;
+    --card-bg: #fffaf0;    /* 浅米色卡片背景 */
+    --link-color: #d4976a; /* 暖棕色链接 */
+    --border-color: #e6d5c3; /* 暖色边框 */
 }
 
 [data-theme="dark"] {
-    --bg-color: #333333;
+    --bg-color: #1a1a1a;
     --text-color: #ffffff;
     --sidebar-bg: #222222;
+    --card-bg: #2d2d2d;
 }
 
 .sidebar {
@@ -42,6 +46,11 @@ body {
     transition: background-color 0.2s;
 }
 
+.nav-link:hover,
+.nav-link.active {
+    color: var(--link-color);
+}
+
 .nav-link:hover {
     background-color: rgba(0,0,0,0.1);
 }
@@ -60,7 +69,8 @@ body {
 }
 
 .profile-card {
-    background: rgba(255,255,255,0.05);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -82,6 +92,16 @@ body {
 
 .animate-fade-in {
     animation: fadeIn 1s ease-in;
+}
+
+.btn-outline-primary {
+    color: var(--link-color);
+    border-color: var(--link-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--link-color);
+    color: #ffffff;
 }
 
 @keyframes fadeIn {
