@@ -26,6 +26,7 @@ body {
     --link-color: #e6b17f;    /* 明亮的暖橙色 */
     --border-color: #505050;  /* 深色边框 */
     --btn-color: #e0e0e0;     /* 按钮颜色 */
+    --muted-color: #a0a0a0;   /* 添加暗色主题下的次要文字颜色 */
 }
 
 .sidebar {
@@ -265,4 +266,9 @@ body {
     .col-md-4, .col-md-6 {
         padding: 0.5rem;
     }
+}
+
+/* 添加暗色主题下的text-muted样式 */
+[data-theme="dark"] .text-muted {
+    color: var(--muted-color) !important;
 }
