@@ -44,7 +44,7 @@ body {
 }
 
 .toggle-sidebar {
-    position: fixed;
+    position: absolute;
     width: 45px;
     height: 45px;
     z-index: 1001;
@@ -61,36 +61,39 @@ body {
     color: var(--btn-color);
 }
 
-.toggle-sidebar:hover {
-    background: var(--card-bg);
-    transform: scale(1.1);
-}
-
 .toggle-sidebar.collapsed {
+    position: fixed;
     left: 1.5rem;
     top: 1.5rem;
 }
 
 .toggle-sidebar:not(.collapsed) {
-    position: absolute;
     right: 1rem;
     top: 1rem;
 }
 
-.toggle-sidebar .fa-bars {
-    display: none;
-}
-
+/* 确保按钮图标始终可见 */
+.toggle-sidebar .fa-bars,
 .toggle-sidebar .fa-times {
-    display: none;
+    display: block;
+    position: absolute;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .toggle-sidebar.collapsed .fa-bars {
-    display: block;
+    opacity: 1;
+}
+
+.toggle-sidebar.collapsed .fa-times {
+    opacity: 0;
+}
+
+.toggle-sidebar:not(.collapsed) .fa-bars {
+    opacity: 0;
 }
 
 .toggle-sidebar:not(.collapsed) .fa-times {
-    display: block;
+    opacity: 1;
 }
 
 .main-content {
@@ -155,6 +158,22 @@ body {
     position: fixed;
     top: 1rem;
     right: 1rem;
+}
+
+.theme-switch .btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.theme-switch .btn:hover {
+    transform: scale(1.1);
 }
 
 .animate-fade-in {
@@ -229,7 +248,7 @@ body {
     }
 
     .toggle-sidebar {
-        display: none;
+        display: block; /* 确保移动端也显示切换按钮 */
     }
     
     .sidebar.collapsed {
