@@ -1,33 +1,19 @@
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>江苏省江都中学 2024 级高一（5）班</title>
-    <link rel="icon" href="image/logo.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="image/logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/element-plus.index.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="js/script.js" defer></script>
-    <script src="js/element-plus.full.js"></script>
-    <script src="js/vue3.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>江苏省江都中学 2024 级高一（5）班</title>
+        <link rel="icon" href="image/logo.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="image/logo.ico" type="image/x-icon">
+        <!-- <link rel="stylesheet" href="css/element-plus.index.css"> -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script src="js/script.js" defer></script>
+        <!-- <script src="js/element-plus.full.js"></script>
+        <script src="js/vue3.js"></script> -->
+    </head>
 <body>
-    <div class="top-bar">
-        <div class="left-section">
-            <span class="site-title">伍班E站</span>
-        </div>
-        <div class="right-section">
-            <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
-                <i class="fas fa-moon"></i>
-            </button>
-            <button class="btn btn-outline-primary ms-2" onclick="showLoginModal()" title="登录">
-                <i class="fas fa-user"></i>
-            </button>
-        </div>
-    </div>
-
     <div class="sidebar">
         <button class="toggle-sidebar" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
@@ -49,6 +35,12 @@
     </div>
 
     <div class="main-content">
+        <div class="theme-switch">
+            <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
         <div class="content-section active" id="profile">
             <div class="profile-card animate-fade-in">
                 <div class="text-center">
@@ -156,32 +148,5 @@
      -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- 在body标签末尾添加登录模态框 -->
-    <div class="login-modal" id="loginModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5>登录</h5>
-                <button class="close-btn" onclick="hideLoginModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="loginForm" onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" id="username" class="form-control" required>
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="password">密码</label>
-                        <input type="password" id="password" class="form-control" required>
-                    </div>
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-primary">登录</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

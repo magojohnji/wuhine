@@ -29,39 +29,12 @@ body {
     --muted-color: #a0a0a0;   /* 添加暗色主题下的次要文字颜色 */
 }
 
-.top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: var(--sidebar-bg);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-    z-index: 1002;
-}
-
-.top-bar .site-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-.top-bar .right-section {
-    display: flex;
-    gap: 0.5rem;
-}
-
 .sidebar {
     width: 250px;
     padding: 2rem;
     background: var(--sidebar-bg);
     position: fixed;
-    height: calc(100vh - 60px);
-    top: 60px;
+    height: 100vh;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
@@ -129,7 +102,6 @@ body {
     padding: 2rem;
     margin-left: 250px;
     transition: margin-left 0.3s ease-in-out;
-    margin-top: 60px;
 }
 
 .main-content.collapsed {
@@ -247,76 +219,6 @@ body {
     font-size: 0.9rem;
 }
 
-.login-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2000;
-    align-items: center;
-    justify-content: center;
-}
-
-.login-modal.show {
-    display: flex;
-}
-
-.modal-content {
-    background: var(--sidebar-bg);
-    border-radius: 10px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.modal-header {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-body {
-    padding: 1.5rem;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: var(--text-color);
-    cursor: pointer;
-}
-
-.close-btn:hover {
-    color: var(--link-color);
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background: var(--bg-color);
-    color: var(--text-color);
-}
-
-.form-control:focus {
-    border-color: var(--link-color);
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(212, 151, 106, 0.2);
-}
-
 /* 移动端适配 */
 @media (max-width: 768px) {
     .sidebar {
@@ -324,7 +226,6 @@ body {
         height: auto;
         position: relative;
         padding: 1rem;
-        top: 60px;
     }
 
     .sidebar.collapsed {
@@ -357,10 +258,6 @@ body {
 
     .sidebar.collapsed {
         transform: none;
-    }
-
-    .top-bar {
-        padding: 0 1rem;
     }
 }
 
