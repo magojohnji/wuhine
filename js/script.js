@@ -17,6 +17,27 @@ function toggleSidebar() {
     mainContent.classList.toggle('collapsed');
 }
 
+function showLoginModal() {
+    document.getElementById('loginModal').classList.add('show');
+}
+
+function hideLoginModal() {
+    document.getElementById('loginModal').classList.remove('show');
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    // TODO: 这里添加实际的登录逻辑
+    console.log('登录信息:', { username, password });
+    
+    // 临时提示
+    alert('登录功能开发中...');
+    hideLoginModal();
+}
+
 // 页面加载完成后执行
 document.addEventListener('DOMContentLoaded', () => {
     // 检测设备类型并设置侧栏初始状态
@@ -89,4 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.toggle-sidebar').classList.add('collapsed');
         document.querySelector('.main-content').classList.add('collapsed');
     }
+
+    const loginModal = document.getElementById('loginModal');
+    loginModal.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            hideLoginModal();
+        }
+    });
 });
