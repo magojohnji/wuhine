@@ -14,6 +14,20 @@
     <script src="js/vue3.js"></script>
 </head>
 <body>
+    <div class="top-bar">
+        <div class="left-section">
+            <span class="site-title">伍班E站</span>
+        </div>
+        <div class="right-section">
+            <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="btn btn-outline-primary ms-2" title="登录">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </div>
+
     <div class="sidebar">
         <button class="toggle-sidebar" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
@@ -35,12 +49,6 @@
     </div>
 
     <div class="main-content">
-        <div class="theme-switch">
-            <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-
         <div class="content-section active" id="profile">
             <div class="profile-card animate-fade-in">
                 <div class="text-center">
