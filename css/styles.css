@@ -1,12 +1,13 @@
-/* styles.css */
+/* 网站字体定义 */
 @font-face {
     font-family: 'PingFang';
     src: url('../font/Pingfang-SC.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;  /* 优化字体加载 */
+    font-display: swap;  /* 优化字体加载性能 */
 }
 
+/* 标题专用中等粗细字体 */
 @font-face {
     font-family: 'PingFang-Medium';
     src: url('../font/Pingfang-Medium-SC.ttf') format('truetype');
@@ -25,6 +26,7 @@ body {
     font-family: inherit; /* 继承根元素的字体设置 */
 }
 
+/* 基础布局与样式变量 */
 :root {
     --bg-color: #fff5e6;      /* 暖米色背景 */
     --text-color: #4a3f35;    /* 深褐色文字 */
@@ -36,6 +38,7 @@ body {
     font-family: 'PingFang', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
+/* 主题色变量-暗色模式 */
 [data-theme="dark"] {
     --bg-color: #2c2c2c;      /* 深灰背景 */
     --text-color: #e0e0e0;    /* 浅灰文字 */
@@ -47,6 +50,7 @@ body {
     --muted-color: #a0a0a0;   /* 添加暗色主题下的次要文字颜色 */
 }
 
+/* 侧边栏基本样式 */
 .sidebar {
     width: 250px;
     padding: 2rem;
@@ -59,6 +63,7 @@ body {
     top: 60px;
 }
 
+/* 侧边栏折叠状态 */
 .sidebar.collapsed {
     transform: translateX(-250px);
 }
@@ -116,6 +121,24 @@ body {
     opacity: 1;
 }
 
+/* 响应式布局断点 */
+@media (max-width: 1024px) {
+    /* 平板端适配 */
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+}
+
+/* 桌面端布局 */
+@media (min-width: 1025px) {
+    /* ...existing code... */
+}
+
+/* 内容区布局 */
 .main-content {
     flex: 1;
     padding: 2rem;
@@ -173,6 +196,7 @@ body {
     overflow-x: hidden;
 }
 
+/* 标题特殊字体设置 */
 .profile-card .display-4 {
     font-family: 'PingFang-Medium', 'PingFang', sans-serif;
     font-weight: 500;
@@ -242,8 +266,7 @@ body {
     }
 }
 
-/* 删除 .footer 和 .site-footer 相关样式 */
-
+/* 版权信息样式 */
 .copyright-text {
     text-align: center;
     color: var(--text-color);
@@ -291,57 +314,10 @@ copyright-text img {
 
 /* 移动端适配 */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 1rem;
-    }
-
-    .sidebar.collapsed {
-        display: none; /* 改用display来控制显示/隐藏 */
-    }
-
-    .main-content {
-        margin-left: 0;
-        padding: 1rem;
-    }
-
-    .theme-switch {
-        position: static;
-        text-align: center;
-        margin: 1rem 0;
-    }
-
-    .profile-image {
-        width: 150px;
-        height: 150px;
-    }
-
-    .nav-link {
-        padding: 0.25rem 0.5rem;
-    }
-
-    .toggle-sidebar {
-        display: block; /* 确保移动端也显示切换按钮 */
-    }
-
-    .sidebar.collapsed {
-        transform: none;
-    }
-
-    .top-bar {
-        padding: 0 1rem;
-    }
+    /* ...existing code... */
 }
 
-/* 适配移动端的卡片布局 */
+/* 小屏幕设备优化 */
 @media (max-width: 576px) {
-    .row {
-        margin: 0;
-    }
-
-    .col-md-4, .col-md-6 {
-        padding: 0.5rem;
-    }
+    /* ...existing code... */
 }

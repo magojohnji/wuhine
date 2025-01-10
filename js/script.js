@@ -1,9 +1,10 @@
+// 主题切换功能
 function toggleTheme() {
     const isDark = document.body.dataset.theme === 'dark';
     document.body.dataset.theme = isDark ? 'light' : 'dark';
     
-    // 切换图标：暗色模式显示太阳，亮色模式显示月亮
-    const themeIcon = document.querySelector('.right-section .btn i');  // 修改选择器
+    // 切换主题图标
+    const themeIcon = document.querySelector('.right-section .btn i');
     themeIcon.className = `fas fa-${isDark ? 'moon' : 'sun'}`;
 }
 
