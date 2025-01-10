@@ -1,4 +1,20 @@
 /* styles.css */
+@font-face {
+    font-family: 'PingFang';
+    src: url('../font/Pingfang-SC.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;  /* 优化字体加载 */
+}
+
+@font-face {
+    font-family: 'PingFang-Medium';
+    src: url('../font/Pingfang-Medium-SC.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -17,7 +33,7 @@ body {
     --link-color: #d4976a;    /* 暖棕色链接 */
     --border-color: #e6d5c3;  /* 暖色边框 */
     --btn-color: #4a3f35;     /* 按钮颜色 */
-    font-family: "PingFang SC", "PingFang HK", "PingFang TC", "Hiragino Sans GB", "Microsoft YaHei", "Heiti SC", sans-serif;
+    font-family: 'PingFang', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 [data-theme="dark"] {
@@ -155,6 +171,12 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     max-width: 100%;
     overflow-x: hidden;
+}
+
+.profile-card .display-4 {
+    font-family: 'PingFang-Medium', 'PingFang', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .profile-image {
