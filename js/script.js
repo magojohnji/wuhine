@@ -3,7 +3,7 @@ function toggleTheme() {
     document.body.dataset.theme = isDark ? 'light' : 'dark';
     
     // 切换图标：暗色模式显示太阳，亮色模式显示月亮
-    const themeIcon = document.querySelector('.theme-switch i');
+    const themeIcon = document.querySelector('.right-section .btn i');  // 修改选择器
     themeIcon.className = `fas fa-${isDark ? 'moon' : 'sun'}`;
 }
 
@@ -17,7 +17,6 @@ function toggleSidebar() {
     mainContent.classList.toggle('collapsed');
 }
 
-// 页面加载完成后执行
 document.addEventListener('DOMContentLoaded', () => {
     // 检测设备类型并设置侧栏初始状态
     const isMobile = window.innerWidth <= 768;
@@ -31,11 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.classList.add('collapsed');
     }
 
-    // 自动检测系统主题
+    // 自动检测系统主题并设置初始图标
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.body.dataset.theme = prefersDark ? 'dark' : 'light';
-    document.querySelector('.theme-switch i').className = 
-        `fas fa-${prefersDark ? 'sun' : 'moon'}`;
+    
+    const themeIcon = document.querySelector('.right-section .btn i');  // 修改选择器
+    if (themeIcon) {  // 添加空值检查
+        themeIcon.className = `fas fa-${prefersDark ? 'sun' : 'moon'}`;
+    }
 
     // 监听系统主题变化
     window.matchMedia('(prefers-color-scheme: dark)')
