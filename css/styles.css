@@ -277,17 +277,26 @@ body {
     font-size: 0.8rem;
     padding: 1.5rem 0;
     margin-top: auto;
-    height: 60px;
+    min-height: 60px; /* 改为最小高度 */
     display: flex;
+    flex-wrap: wrap; /* 允许换行 */
     align-items: center;
     justify-content: center;
-    gap: 0.1rem;
+    gap: 0.3rem; /* 增加间距 */
     margin-bottom: 0;
+    line-height: 1.5;
+}
+
+copyright-text a {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap; /* 防止文字断行 */
 }
 
 copyright-text img {
-    height: 16px;    /* 设置图标大小 */
+    height: 16px;
     width: auto;
+    margin: 0 0.2rem; /* 给图标添加左右间距 */
 }
 
 .top-bar {
@@ -318,7 +327,14 @@ copyright-text img {
 
 /* 移动端适配 */
 @media (max-width: 768px) {
-    /* ...existing code... */
+    .copyright-text {
+        padding: 1rem 0;
+        gap: 0.2rem 0.5rem; /* 垂直间距更小，水平间距更大 */
+        max-width: 100%;
+        justify-content: center;
+        flex-flow: row wrap;
+        height: auto; /* 自适应高度 */
+    }
 }
 
 /* 小屏幕设备优化 */
