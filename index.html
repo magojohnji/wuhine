@@ -55,6 +55,11 @@
         </script>
     </head>
 <body>
+    <!-- 添加打开侧栏按钮 -->
+    <button class="open-sidebar" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <!-- 添加顶栏 -->
     <div class="top-bar">
         <div class="left-section">
@@ -69,8 +74,7 @@
     </div>
 
     <div class="sidebar">
-        <button class="toggle-sidebar" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
+        <button class="close-sidebar" onclick="toggleSidebar()">
             <i class="fas fa-times"></i>
         </button>
         <div class="text-center mb-4">

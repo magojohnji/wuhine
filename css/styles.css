@@ -63,13 +63,39 @@ body {
     top: 60px;
 }
 
+/* 关闭侧栏按钮样式 */
+.close-sidebar {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 45px;
+    height: 45px;
+    background: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--btn-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.close-sidebar:hover {
+    transform: scale(1.1);
+}
+
 /* 侧边栏折叠状态 */
 .sidebar.collapsed {
     transform: translateX(-250px);
 }
 
-.toggle-sidebar {
-    position: absolute;
+/* 打开侧栏按钮样式 */
+.open-sidebar {
+    position: fixed;
+    left: 1rem;  /* 改为 1rem，与关闭按钮对齐 */
+    top: calc(60px + 1rem);  /* 顶栏高度 + 1rem 边距 */
     width: 45px;
     height: 45px;
     z-index: 1001;
@@ -78,7 +104,7 @@ body {
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
@@ -86,39 +112,8 @@ body {
     color: var(--btn-color);
 }
 
-.toggle-sidebar.collapsed {
-    position: fixed;
-    left: 1.5rem;
-    top: 1.5rem;
-}
-
-.toggle-sidebar:not(.collapsed) {
-    right: 1rem;
-    top: 1rem;
-}
-
-/* 确保按钮图标始终可见 */
-.toggle-sidebar .fa-bars,
-.toggle-sidebar .fa-times {
-    display: block;
-    position: absolute;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.toggle-sidebar.collapsed .fa-bars {
-    opacity: 1;
-}
-
-.toggle-sidebar.collapsed .fa-times {
-    opacity: 0;
-}
-
-.toggle-sidebar:not(.collapsed) .fa-bars {
-    opacity: 0;
-}
-
-.toggle-sidebar:not(.collapsed) .fa-times {
-    opacity: 1;
+.open-sidebar.visible {
+    display: flex;
 }
 
 /* 响应式布局断点 */

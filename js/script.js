@@ -10,25 +10,25 @@ function toggleTheme() {
 
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
-    const toggleBtn = document.querySelector('.toggle-sidebar');
+    const openBtn = document.querySelector('.open-sidebar');
     const mainContent = document.querySelector('.main-content');
     
     sidebar.classList.toggle('collapsed');
-    toggleBtn.classList.toggle('collapsed');
     mainContent.classList.toggle('collapsed');
+    openBtn.classList.toggle('visible', sidebar.classList.contains('collapsed'));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     // 检测设备类型并设置侧栏初始状态
     const isMobile = window.innerWidth <= 768;
     const sidebar = document.querySelector('.sidebar');
-    const toggleBtn = document.querySelector('.toggle-sidebar');
+    const openBtn = document.querySelector('.open-sidebar');
     const mainContent = document.querySelector('.main-content');
 
     if (isMobile || window.innerWidth <= 1024) {
         sidebar.classList.add('collapsed');
-        toggleBtn.classList.add('collapsed');
         mainContent.classList.add('collapsed');
+        openBtn.classList.add('visible');
     }
 
     // 自动检测系统主题并设置初始图标
@@ -68,28 +68,23 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         const currentWidth = window.innerWidth;
         const sidebar = document.querySelector('.sidebar');
-        const toggleBtn = document.querySelector('.toggle-sidebar');
+        const openBtn = document.querySelector('.open-sidebar');
         const mainContent = document.querySelector('.main-content');
 
-        if (currentWidth <= 768) {  // 移动端
+        if (currentWidth <= 768 || currentWidth <= 1024) {  // 移动端和平板端
             sidebar.classList.add('collapsed');
-            toggleBtn.classList.add('collapsed');
             mainContent.classList.add('collapsed');
-        } else if (currentWidth <= 1024) {  // 平板端
-            sidebar.classList.add('collapsed');
-            toggleBtn.classList.add('collapsed');
-            mainContent.classList.add('collapsed');
+            openBtn.classList.add('visible');
         } else {  // 桌面端
             sidebar.classList.remove('collapsed');
-            toggleBtn.classList.remove('collapsed');
             mainContent.classList.remove('collapsed');
+            openBtn.classList.remove('visible');
         }
     });
 
     // 初始检查屏幕宽度
     if (window.innerWidth <= 1024) {
         document.querySelector('.sidebar').classList.add('collapsed');
-        document.querySelector('.toggle-sidebar').classList.add('collapsed');
         document.querySelector('.main-content').classList.add('collapsed');
     }
 });
