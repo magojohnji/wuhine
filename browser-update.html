@@ -4,6 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>请升级您的浏览器</title>
+    <script>
+        // 检查是否为现代浏览器
+        function isModernBrowser() {
+            // 检测是否是 IE
+            if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.userAgent.indexOf('Trident/') !== -1) {
+                return false;
+            }
+            
+            // 检测旧版 Edge (EdgeHTML)
+            if (navigator.userAgent.indexOf('Edge/') !== -1) {
+                return false;
+            }
+            
+            // 检测 Chrome 版本
+            const chromeMatch = navigator.userAgent.match(/Chrome\/(\d+)/);
+            if (chromeMatch && parseInt(chromeMatch[1]) < 80) {
+                return false;
+            }
+            
+            // 检测 Firefox 版本
+            const firefoxMatch = navigator.userAgent.match(/Firefox\/(\d+)/);
+            if (firefoxMatch && parseInt(firefoxMatch[1]) < 70) {
+                return false;
+            }
+
+            // 检测新版 Edge 版本
+            const edgeMatch = navigator.userAgent.match(/Edg\/(\d+)/);
+            if (edgeMatch && parseInt(edgeMatch[1]) < 80) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // 如果是现代浏览器，跳转回主页
+        if (isModernBrowser()) {
+            window.location.href = 'index.html';
+        }
+    </script>
     <style>
         body {
             font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
