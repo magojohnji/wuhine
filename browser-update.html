@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请升级您的浏览器</title>
+    <script>
+        // 检查是否为现代浏览器
+        function isModernBrowser() {
+            // 检测是否是 IE
+            if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.userAgent.indexOf('Trident/') !== -1) {
+                return false;
+            }
+            
+            // 检测旧版 Edge (EdgeHTML)
+            if (navigator.userAgent.indexOf('Edge/') !== -1) {
+                return false;
+            }
+            
+            // 检测 Chrome 版本
+            const chromeMatch = navigator.userAgent.match(/Chrome\/(\d+)/);
+            if (chromeMatch && parseInt(chromeMatch[1]) < 80) {
+                return false;
+            }
+            
+            // 检测 Firefox 版本
+            const firefoxMatch = navigator.userAgent.match(/Firefox\/(\d+)/);
+            if (firefoxMatch && parseInt(firefoxMatch[1]) < 70) {
+                return false;
+            }
+
+            // 检测新版 Edge 版本
+            const edgeMatch = navigator.userAgent.match(/Edg\/(\d+)/);
+            if (edgeMatch && parseInt(edgeMatch[1]) < 80) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // 如果是现代浏览器，跳转回主页
+        if (isModernBrowser()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .browser-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        .browser-item {
+            text-align: center;
+            margin: 15px;
+            width: 200px;
+        }
+        .browser-item img {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 10px;
+        }
+        .browser-item a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .browser-item a:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>您的浏览器版本过低</h1>
+        <p>为了保证最佳浏览体验，请升级您的浏览器。我们推荐以下现代浏览器：</p>
+        
+        <div class="browser-list">
+            <div class="browser-item">
+                <img src="image/GoogleChrome.png" alt="Chrome">
+                <h3>Google Chrome</h3>
+                <a href="https://www.google.com/chrome/" target="_blank">下载 Chrome</a>
+            </div>
+            
+            <div class="browser-item">
+                <img src="image/MSEdge.png" alt="Edge">
+                <h3>新版 Microsoft Edge</h3>
+                <a href="https://www.microsoft.com/edge" target="_blank">下载 Edge</a>
+            </div>
+            
+            <div class="browser-item">
+                <img src="image/MozillaFirefox.png" alt="Firefox">
+                <h3>Mozilla Firefox</h3>
+                <a href="https://www.mozilla.org/zh-CN/firefox/all/" target="_blank">下载 Firefox</a>
+            </div>
+        </div>
+        
+        <p>或许例如 2345浏览器、360浏览器系列、搜狗高速浏览器、双核浏览器、夸克浏览器、百度浏览器、联想浏览器、UC浏览器等也可以打开，但是这些都基于 Chromium 内核，并包含流氓内容，不建议使用。</p>
+
+        <p>使用现代浏览器可以获得：</p>
+        <ul>
+            <li>更快的浏览速度</li>
+            <li>更好的安全性</li>
+            <li>更多的现代网页特性支持</li>
+            <li>更流畅的使用体验</li>
+        </ul>
+    </div>
+</body>
+</html>

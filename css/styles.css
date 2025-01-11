@@ -1,4 +1,21 @@
-/* styles.css */
+/* 网站字体定义 */
+@font-face {
+    font-family: 'PingFang';
+    src: url('../font/Pingfang-SC.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;  /* 优化字体加载性能 */
+}
+
+/* 标题专用中等粗细字体 */
+@font-face {
+    font-family: 'PingFang-Medium';
+    src: url('../font/Pingfang-Medium-SC.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -6,8 +23,10 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
+    font-family: inherit; /* 继承根元素的字体设置 */
 }
 
+/* 基础布局与样式变量 */
 :root {
     --bg-color: #fff5e6;      /* 暖米色背景 */
     --text-color: #4a3f35;    /* 深褐色文字 */
@@ -16,8 +35,10 @@ body {
     --link-color: #d4976a;    /* 暖棕色链接 */
     --border-color: #e6d5c3;  /* 暖色边框 */
     --btn-color: #4a3f35;     /* 按钮颜色 */
+    font-family: 'PingFang', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
+/* 主题色变量-暗色模式 */
 [data-theme="dark"] {
     --bg-color: #2c2c2c;      /* 深灰背景 */
     --text-color: #e0e0e0;    /* 浅灰文字 */
@@ -29,23 +50,52 @@ body {
     --muted-color: #a0a0a0;   /* 添加暗色主题下的次要文字颜色 */
 }
 
+/* 侧边栏基本样式 */
 .sidebar {
     width: 250px;
     padding: 2rem;
     background: var(--sidebar-bg);
     position: fixed;
-    height: 100vh;
+    height: calc(100vh - 60px);
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
+    top: 60px;
 }
 
+/* 关闭侧栏按钮样式 */
+.close-sidebar {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 45px;
+    height: 45px;
+    background: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--btn-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.close-sidebar:hover {
+    transform: scale(1.1);
+}
+
+/* 侧边栏折叠状态 */
 .sidebar.collapsed {
     transform: translateX(-250px);
 }
 
-.toggle-sidebar {
-    position: absolute;
+/* 打开侧栏按钮样式 */
+.open-sidebar {
+    position: fixed;
+    left: 1rem;  /* 改为 1rem，与关闭按钮对齐 */
+    top: calc(60px + 1rem);  /* 顶栏高度 + 1rem 边距 */
     width: 45px;
     height: 45px;
     z-index: 1001;
@@ -54,7 +104,7 @@ body {
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
@@ -62,46 +112,38 @@ body {
     color: var(--btn-color);
 }
 
-.toggle-sidebar.collapsed {
-    position: fixed;
-    left: 1.5rem;
-    top: 1.5rem;
+.open-sidebar.visible {
+    display: flex;
 }
 
-.toggle-sidebar:not(.collapsed) {
-    right: 1rem;
-    top: 1rem;
+/* 响应式布局断点 */
+@media (max-width: 1024px) {
+    /* 平板端适配 */
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
 }
 
-/* 确保按钮图标始终可见 */
-.toggle-sidebar .fa-bars,
-.toggle-sidebar .fa-times {
-    display: block;
-    position: absolute;
-    transition: opacity 0.3s ease-in-out;
+/* 桌面端布局 */
+@media (min-width: 1025px) {
+    /* ...existing code... */
 }
 
-.toggle-sidebar.collapsed .fa-bars {
-    opacity: 1;
-}
-
-.toggle-sidebar.collapsed .fa-times {
-    opacity: 0;
-}
-
-.toggle-sidebar:not(.collapsed) .fa-bars {
-    opacity: 0;
-}
-
-.toggle-sidebar:not(.collapsed) .fa-times {
-    opacity: 1;
-}
-
+/* 内容区布局 */
 .main-content {
     flex: 1;
     padding: 2rem;
     margin-left: 250px;
     transition: margin-left 0.3s ease-in-out;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px); /* 确保内容区域填满剩余高度 */
+    padding-bottom: 0; /* 移除底部内边距 */
 }
 
 .main-content.collapsed {
@@ -131,10 +173,13 @@ body {
 
 .content-section {
     display: none;
+    flex: 1;
+    margin-bottom: auto; /* 修改这一行，让内容区域自动占据空间 */
 }
 
 .content-section.active {
-    display: block;
+    display: flex;  /* 修改为flex */
+    flex-direction: column; /* 添加这一行 */
 }
 
 .profile-card {
@@ -145,6 +190,13 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     max-width: 100%;
     overflow-x: hidden;
+}
+
+/* 标题特殊字体设置 */
+.profile-card .display-4 {
+    font-family: 'PingFang-Medium', 'PingFang', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .profile-image {
@@ -210,64 +262,59 @@ body {
     }
 }
 
-.footer {
+/* 版权信息样式 */
+.copyright-text {
     text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
-    border-top: 1px solid var(--border-color);
     color: var(--text-color);
-    font-size: 0.9rem;
+    opacity: 0.8;
+    font-size: 0.8rem;
+    padding: 1.5rem 0;
+    margin-top: auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+    margin-bottom: 0;
+}
+
+copyright-text img {
+    height: 16px;    /* 设置图标大小 */
+    width: auto;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--sidebar-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 1002;
+}
+
+.top-bar .site-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.top-bar .right-section {
+    display: flex;
+    gap: 0.5rem;
 }
 
 /* 移动端适配 */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 1rem;
-    }
-
-    .sidebar.collapsed {
-        display: none; /* 改用display来控制显示/隐藏 */
-    }
-
-    .main-content {
-        margin-left: 0;
-        padding: 1rem;
-    }
-
-    .theme-switch {
-        position: static;
-        text-align: center;
-        margin: 1rem 0;
-    }
-
-    .profile-image {
-        width: 150px;
-        height: 150px;
-    }
-
-    .nav-link {
-        padding: 0.25rem 0.5rem;
-    }
-
-    .toggle-sidebar {
-        display: block; /* 确保移动端也显示切换按钮 */
-    }
-
-    .sidebar.collapsed {
-        transform: none;
-    }
+    /* ...existing code... */
 }
 
-/* 适配移动端的卡片布局 */
+/* 小屏幕设备优化 */
 @media (max-width: 576px) {
-    .row {
-        margin: 0;
-    }
-
-    .col-md-4, .col-md-6 {
-        padding: 0.5rem;
-    }
+    /* ...existing code... */
 }

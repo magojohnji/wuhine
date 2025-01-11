@@ -10,13 +10,71 @@
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="js/script.js" defer></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
         <!-- <script src="js/element-plus.full.js"></script>
         <script src="js/vue3.js"></script> -->
+        <script>
+            // 浏览器版本检测
+            function checkBrowser() {
+                // 检测是否是 IE
+                if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.userAgent.indexOf('Trident/') !== -1) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+                
+                // 检测旧版 Edge (EdgeHTML)
+                if (navigator.userAgent.indexOf('Edge/') !== -1) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+                
+                // 获取 Chrome 版本
+                const chromeMatch = navigator.userAgent.match(/Chrome\/(\d+)/);
+                if (chromeMatch && parseInt(chromeMatch[1]) < 80) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+                
+                // 获取 Firefox 版本
+                const firefoxMatch = navigator.userAgent.match(/Firefox\/(\d+)/);
+                if (firefoxMatch && parseInt(firefoxMatch[1]) < 70) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+
+                // 获取 Edge 版本（新版基于 Chromium）
+                const edgeMatch = navigator.userAgent.match(/Edg\/(\d+)/);
+                if (edgeMatch && parseInt(edgeMatch[1]) < 80) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+            }
+
+            // 页面加载时检测浏览器
+            checkBrowser();
+        </script>
     </head>
 <body>
+    <!-- 添加打开侧栏按钮 -->
+    <button class="open-sidebar" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- 添加顶栏 -->
+    <div class="top-bar">
+        <div class="left-section">
+            <span class="site-title">伍班E站</span>
+        </div>
+        <div class="right-section">
+            <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
+                <i class="fas fa-moon"></i>
+            </button>
+            <!-- 移除登录按钮 -->
+        </div>
+    </div>
+
     <div class="sidebar">
-        <button class="toggle-sidebar" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
+        <button class="close-sidebar" onclick="toggleSidebar()">
             <i class="fas fa-times"></i>
         </button>
         <div class="text-center mb-4">
@@ -35,12 +93,6 @@
     </div>
 
     <div class="main-content">
-        <div class="theme-switch">
-            <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-
         <div class="content-section active" id="profile">
             <div class="profile-card animate-fade-in">
                 <div class="text-center">
@@ -139,14 +191,14 @@
                 <p>待添加班级神人相关内容...</p>
             </div>
         </div>
+        
+        <!-- 在最后添加版权信息 -->
+        <div class="copyright-text">
+            <a>Copyright &copy; 高一 ⑸ 班 2025 |</a>
+            <a title="本站支持 IPv6 访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问" src="image/ipv6-certified-s1.svg"></a>
+            <a title="本站支持 SSL 安全访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问" src="image/ssl-s1.svg"></a>
+            <a>| 江苏省江都中学 | 请遵守中国法律法规</a>
+        </div>
     </div>
-
-<!-- 
-    <footer class="footer">
-        <p>&copy; 2024 伍班E站. All rights reserved.</p>
-    </footer>
-     -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
