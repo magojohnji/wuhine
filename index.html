@@ -13,6 +13,46 @@
         <script src="js/bootstrap.bundle.min.js"></script>
         <!-- <script src="js/element-plus.full.js"></script>
         <script src="js/vue3.js"></script> -->
+        <script>
+            // 浏览器版本检测
+            function checkBrowser() {
+                // 检测是否是 IE
+                if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.userAgent.indexOf('Trident/') !== -1) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+                
+                // 检测旧版 Edge (EdgeHTML)
+                if (navigator.userAgent.indexOf('Edge/') !== -1) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+                
+                // 获取 Chrome 版本
+                const chromeMatch = navigator.userAgent.match(/Chrome\/(\d+)/);
+                if (chromeMatch && parseInt(chromeMatch[1]) < 80) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+                
+                // 获取 Firefox 版本
+                const firefoxMatch = navigator.userAgent.match(/Firefox\/(\d+)/);
+                if (firefoxMatch && parseInt(firefoxMatch[1]) < 70) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+
+                // 获取 Edge 版本（新版基于 Chromium）
+                const edgeMatch = navigator.userAgent.match(/Edg\/(\d+)/);
+                if (edgeMatch && parseInt(edgeMatch[1]) < 80) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
+            }
+
+            // 页面加载时检测浏览器
+            checkBrowser();
+        </script>
     </head>
 <body>
     <!-- 添加顶栏 -->
