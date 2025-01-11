@@ -148,6 +148,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 60px); /* 确保内容区域填满剩余高度 */
+    padding-bottom: 0; /* 移除底部内边距 */
 }
 
 .main-content.collapsed {
@@ -273,12 +274,13 @@ body {
     opacity: 0.8;
     font-size: 0.8rem;
     padding: 1.5rem 0;
-    margin-top: auto;  /* 将页脚推到底部 */
-    height: 60px;     /* 固定高度 */
-    display: flex;    /* 使用flex布局 */
-    align-items: center;  /* 垂直居中 */
-    justify-content: center;  /* 水平居中 */
-    gap: 0.1rem;      /* 元素之间的间距 */
+    margin-top: auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+    margin-bottom: 0;
 }
 
 copyright-text img {
