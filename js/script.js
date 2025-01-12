@@ -49,6 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 添加选项卡切换功能
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
+            // 如果链接包含实际的 URL（子页面的返回链接），不阻止默认行为
+            if (link.getAttribute('href').includes('.html')) {
+                return;
+            }
+            
             e.preventDefault();
             const sectionId = link.dataset.section;
             
@@ -87,4 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.sidebar').classList.add('collapsed');
         document.querySelector('.main-content').classList.add('collapsed');
     }
+
+    // 添加卡片展开功能
+    document.querySelectorAll('.expand-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const card = e.target.closest('.expandable-card');
+            card.classList.toggle('expanded');
+            e.target.textContent = card.classList.contains('expanded') ? '收起' : '查看更多';
+        });
+    });
 });
