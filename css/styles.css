@@ -325,6 +325,108 @@ copyright-text img {
     gap: 0.5rem;
 }
 
+/* 可展开卡片样式 */
+.expandable-card {
+    transition: all 0.3s ease-in-out;
+}
+
+.expandable-card .expanded-content {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.expandable-card.expanded .expanded-content {
+    display: block;
+}
+
+.expandable-card .expand-btn {
+    color: var(--link-color);
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.expandable-card.expanded .preview-text {
+    display: none;
+}
+
+.expandable-card .expand-btn:hover {
+    text-decoration: underline;
+}
+
+/* 可点击卡片样式 */
+.clickable-card {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.clickable-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.clickable-card a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* 面包屑导航样式 */
+.breadcrumb {
+    background-color: var(--card-bg);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center; /* 添加垂直居中对齐 */
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center; /* 确保每个项目也垂直居中 */
+}
+
+.breadcrumb-item a {
+    color: var(--link-color);
+    text-decoration: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 1rem;
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: inline-flex; /* 改为 inline-flex */
+    align-items: center; /* 文字垂直居中 */
+}
+
+.breadcrumb-item a:hover {
+    background-color: var(--link-color);
+    color: white;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 1rem;
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    display: inline-flex; /* 改为 inline-flex */
+    align-items: center; /* 文字垂直居中 */
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: var(--text-color);
+    content: "›";
+    font-size: 1.2em;
+    line-height: 1;
+    padding: 0 0.5rem;
+}
+
 /* 移动端适配 */
 @media (max-width: 768px) {
     .copyright-text {
