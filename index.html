@@ -53,6 +53,27 @@
             // 页面加载时检测浏览器
             checkBrowser();
         </script>
+        <style>
+        .main-image, .additional-image {
+            width: 30vw; /* 调整图片宽度 */
+            height: auto; /* 保持图片比例 */
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 1%;
+        }
+        .dark-theme .profile-card {
+            background-color: #333;
+            color: #fff;
+        }
+        .dark-theme .accordion-button {
+            background-color: #444;
+            color: #fff;
+        }
+        .dark-theme .accordion-body {
+            background-color: #555;
+            color: #fff;
+        }
+        </style>
     </head>
 <body>
     <!-- 添加打开侧栏按钮 -->
@@ -153,84 +174,73 @@
         <div class="content-section" id="moments">
             <div class="profile-card animate-fade-in">
                 <h2>班级活动</h2>
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                仪征研学
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div style="white-space: nowrap;">
-                                    <div style="display: inline-block; vertical-align: top;">
-                                        <img src="image/Yi-Zheng/class.jpeg" class="img-fluid rounded mb-4 main-image" alt="课堂场景" id="mainImage" onclick="toggleImages('additionalImages')">
-                                    </div>
-                                    <div id="additionalImages" style="display: none; overflow: hidden; transition: max-height 0.5s ease; white-space: nowrap; vertical-align: top;">
-                                        <img src="image/Yi-Zheng/bamboos-road.jpeg" class="img-fluid rounded mb-4 additional-image" alt="课堂场景1">
-                                        <img src="image/Yi-Zheng/bridge.jpeg" class="img-fluid rounded mb-4 additional-image" alt="课堂场景2">
-                                        <img src="image/Yi-Zheng/students.jpeg" class="img-fluid rounded mb-4 additional-image" alt="课堂场景3">
-                                        <!-- 添加更多图片 -->
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;仪征研学活动丰富多彩，通过参观科技企业、地质公园及历史文化名镇，学生们不仅增长了见识，还深刻体验了家乡文化的魅力，增强了社会责任感与团队合作精神，活动圆满成功，收获颇丰。
-                                    </p>
-                                </div>
+                <div class="profile-card animate-fade-in">
+                    <h2 class="mb-4">仪征研学</h2>
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYiZheng" aria-expanded="false" aria-controls="collapseYiZheng">
+                        展开/折叠
+                    </button>
+                    <div class="collapse" id="collapseYiZheng">
+                        <div style="white-space: nowrap;">
+                            <div style="display: inline-block; vertical-align: top;">
+                                <img src="image/Yi-Zheng/class.jpeg" class="img-fluid rounded mb-4 main-image" alt="课堂场景" id="mainImage" onclick="toggleImages('additionalImages')" style="width: 20vw;">
+                            </div>
+                            <div id="additionalImages" style="display: none; overflow: hidden; transition: max-height 0.5s ease; white-space: nowrap; vertical-align: top;">
+                                <img src="image/Yi-Zheng/bamboos-road.jpeg" class="img-fluid rounded mb-4 additional-image" alt="课堂场景1" style="width: 15vw;">
+                                <img src="image/Yi-Zheng/bridge.jpeg" class="img-fluid rounded mb-4 additional-image" alt="课堂场景2" style="width: 15vw;">
+                                <img src="image/Yi-Zheng/students.jpeg" class="img-fluid rounded mb-4 additional-image" alt="课堂场景3" style="width: 15vw;">
+                                <!-- 添加更多图片 -->
                             </div>
                         </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                羽球比赛
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div style="white-space: nowrap;">
-                                    <div style="display: inline-block; vertical-align: top;">
-                                        <img src="image/Yi-Zheng/badminton1.jpeg" class="img-fluid rounded mb-4 main-image" alt="羽球比赛场景" id="badmintonMainImage" onclick="toggleImages('badmintonAdditionalImages')">
-                                    </div>
-                                    <div id="badmintonAdditionalImages" style="display: none; overflow: hidden; transition: max-height 0.5s ease; white-space: nowrap; vertical-align: top;">
-                                        <img src="image/Yi-Zheng/badminton2.jpeg" class="img-fluid rounded mb-4 additional-image" alt="羽球比赛场景1">
-                                        <img src="image/Yi-Zheng/badminton3.jpeg" class="img-fluid rounded mb-4 additional-image" alt="羽球比赛场景2">
-                                        <!-- 添加更多图片 -->
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;羽球比赛中，学生们展现了高超的球技和顽强的拼搏精神，比赛气氛紧张而激烈，最终取得了优异的成绩。
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="content">
+                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;仪征研学活动丰富多彩，通过参观科技企业、地质公园及历史文化名镇，学生们不仅增长了见识，还深刻体验了家乡文化的魅力，增强了社会责任感与团队合作精神，活动圆满成功，收获颇丰。
+                            </p>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                运动会
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div style="white-space: nowrap;">
-                                    <div style="display: inline-block; vertical-align: top;">
-                                        <img src="image/Yi-Zheng/sports1.jpeg" class="img-fluid rounded mb-4 main-image" alt="运动会场景" id="sportsMainImage" onclick="toggleImages('sportsAdditionalImages')">
-                                    </div>
-                                    <div id="sportsAdditionalImages" style="display: none; overflow: hidden; transition: max-height 0.5s ease; white-space: nowrap; vertical-align: top;">
-                                        <img src="image/Yi-Zheng/sports2.jpeg" class="img-fluid rounded mb-4 additional-image" alt="运动会场景1">
-                                        <img src="image/Yi-Zheng/sports3.jpeg" class="img-fluid rounded mb-4 additional-image" alt="运动会场景2">
-                                        <!-- 添加更多图片 -->
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;运动会期间，学生们积极参与各项比赛，展现了团结协作和奋勇拼搏的精神，活动取得了圆满成功。
-                                    </p>
-                                </div>
+                </div>
+                <div class="profile-card animate-fade-in">
+                    <h2 class="mb-4">羽球比赛</h2>
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBadminton" aria-expanded="false" aria-controls="collapseBadminton">
+                        展开/折叠
+                    </button>
+                    <div class="collapse" id="collapseBadminton">
+                        <div style="white-space: nowrap;">
+                            <div style="display: inline-block; vertical-align: top;">
+                                <img src="image/Yi-Zheng/badminton1.jpeg" class="img-fluid rounded mb-4 main-image" alt="羽球比赛场景" id="badmintonMainImage" onclick="toggleImages('badmintonAdditionalImages')">
                             </div>
+                            <div id="badmintonAdditionalImages" style="display: none; overflow: hidden; transition: max-height 0.5s ease; white-space: nowrap; vertical-align: top;">
+                                <img src="image/Yi-Zheng/badminton2.jpeg" class="img-fluid rounded mb-4 additional-image" alt="羽球比赛场景1">
+                                <img src="image/Yi-Zheng/badminton3.jpeg" class="img-fluid rounded mb-4 additional-image" alt="羽球比赛场景2">
+                                <!-- 添加更多图片 -->
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;羽球比赛中，学生们展现了高超的球技和顽强的拼搏精神，比赛气氛紧张而激烈，最终取得了优异的成绩。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-card animate-fade-in">
+                    <h2 class="mb-4">运动会</h2>
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSports" aria-expanded="false" aria-controls="collapseSports">
+                        展开/折叠
+                    </button>
+                    <div class="collapse" id="collapseSports">
+                        <div style="white-space: nowrap;">
+                            <div style="display: inline-block; vertical-align: top;">
+                                <img src="image/Yi-Zheng/sports1.jpeg" class="img-fluid rounded mb-4 main-image" alt="运动会场景" id="sportsMainImage" onclick="toggleImages('sportsAdditionalImages')">
+                            </div>
+                            <div id="sportsAdditionalImages" style="display: none; overflow: hidden; transition: max-height 0.5s ease; white-space: nowrap; vertical-align: top;">
+                                <img src="image/Yi-Zheng/sports2.jpeg" class="img-fluid rounded mb-4 additional-image" alt="运动会场景1">
+                                <img src="image/Yi-Zheng/sports3.jpeg" class="img-fluid rounded mb-4 additional-image" alt="运动会场景2">
+                                <!-- 添加更多图片 -->
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;运动会期间，学生们积极参与各项比赛，展现了团结协作和奋勇拼搏的精神，活动取得了圆满成功。
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -315,13 +325,4 @@ function toggleImages(id) {
     }
 }
 </script>
-<style>
-.main-image, .additional-image {
-    width: 30vw; /* 调整图片宽度 */
-    height: auto; /* 保持图片比例 */
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 1%;
-}
-</style>
 </html>
