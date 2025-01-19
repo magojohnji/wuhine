@@ -101,4 +101,17 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.textContent = card.classList.contains('expanded') ? '收起' : '查看更多';
         });
     });
+
+    // 添加折叠按钮文字切换功能
+    document.querySelectorAll('.collapse').forEach(collapseElement => {
+        collapseElement.addEventListener('show.bs.collapse', event => {
+            const button = document.querySelector(`[data-bs-target="#${event.target.id}"]`);
+            button.textContent = '折叠';
+        });
+
+        collapseElement.addEventListener('hide.bs.collapse', event => {
+            const button = document.querySelector(`[data-bs-target="#${event.target.id}"]`);
+            button.textContent = '展开';
+        });
+    });
 });

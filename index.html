@@ -53,27 +53,6 @@
             // 页面加载时检测浏览器
             checkBrowser();
         </script>
-        <style>
-        .main-image, .additional-image {
-            width: 30vw; /* 调整图片宽度 */
-            height: auto; /* 保持图片比例 */
-            display: inline-block;
-            vertical-align: top;
-            margin-right: 1%;
-        }
-        .dark-theme .profile-card {
-            background-color: #333;
-            color: #fff;
-        }
-        .dark-theme .accordion-button {
-            background-color: #444;
-            color: #fff;
-        }
-        .dark-theme .accordion-body {
-            background-color: #555;
-            color: #fff;
-        }
-        </style>
     </head>
 <body>
     <!-- 添加打开侧栏按钮 -->
@@ -176,9 +155,9 @@
                 <h2>班级活动</h2>
                 <div class="profile-card animate-fade-in">
                     <h2 class="mb-4">仪征研学</h2>
-                    <div class="activity-card" style="background-image: url('image/Yi-Zheng/class.jpeg');">
-                        <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYiZheng" aria-expanded="false" aria-controls="collapseYiZheng">
-                            展开/折叠
+                    <div class="activity-card" style="background-image: url('image/class.jpeg');">
+                        <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYiZheng" aria-expanded="false">
+                            展开
                         </button>
                     </div>
                     <div class="collapse" id="collapseYiZheng">
@@ -188,17 +167,16 @@
                             <img src="image/Yi-Zheng/students.jpeg" class="img-fluid rounded mb-4" alt="课堂场景3">
                         </div>
                         <div class="content">
-                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
-                                &nbsp;&nbsp;&nbsp;&nbsp;仪征研学活动丰富多彩，通过参观科技企业、地质公园及历史文化名镇，学生们不仅增长了见识，还深刻体验了家乡文化的魅力，增强了社会责任感与团队合作精神，活动圆满成功，收获颇丰。
-                            </p>
+                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
+　　仪征研学活动丰富多彩，通过参观科技企业、地质公园及历史文化名镇，学生们不仅增长了见识，还深刻体验了家乡文化的魅力，增强了社会责任感与团队合作精神，活动圆满成功，收获颇丰。</p>
                         </div>
                     </div>
                 </div>
                 <div class="profile-card animate-fade-in">
                     <h2 class="mb-4">羽球比赛</h2>
                     <div class="activity-card" style="background-image: url('image/Yi-Zheng/badminton1.jpeg');">
-                        <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBadminton" aria-expanded="false" aria-controls="collapseBadminton">
-                            展开/折叠
+                        <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBadminton" aria-expanded="false">
+                            展开
                         </button>
                     </div>
                     <div class="collapse" id="collapseBadminton">
@@ -207,17 +185,16 @@
                             <img src="image/Yi-Zheng/badminton3.jpeg" class="img-fluid rounded mb-4" alt="羽毛球比赛场景2">
                         </div>
                         <div class="content">
-                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
-                                &nbsp;&nbsp;&nbsp;&nbsp;羽球比赛中，学生们展现了高超的球技和顽强的拼搏精神，比赛气氛紧张而激烈，最终取得了优异的成绩。
-                            </p>
+                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
+　　羽球比赛中，学生们展现了高超的球技和顽强的拼搏精神，比赛气氛紧张而激烈，最终取得了优异的成绩。</p>
                         </div>
                     </div>
                 </div>
                 <div class="profile-card animate-fade-in">
                     <h2 class="mb-4">运动会</h2>
                     <div class="activity-card" style="background-image: url('image/Yi-Zheng/sports1.jpeg');">
-                        <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSports" aria-expanded="false" aria-controls="collapseSports">
-                            展开/折叠
+                        <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSports" aria-expanded="false">
+                            展开
                         </button>
                     </div>
                     <div class="collapse" id="collapseSports">
@@ -226,9 +203,8 @@
                             <img src="image/Yi-Zheng/sports3.jpeg" class="img-fluid rounded mb-4" alt="运动会场景2">
                         </div>
                         <div class="content">
-                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap;">
-                                &nbsp;&nbsp;&nbsp;&nbsp;运动会期间，学生们积极参与各项比赛，展现了团结协作和奋勇拼搏的精神，活动取得了圆满成功。
-                            </p>
+                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
+　　运动会期间，学生们积极参与各项比赛，展现了团结协作和奋勇拼搏的精神，活动取得了圆满成功。</p>
                         </div>
                     </div>
                 </div>
@@ -244,7 +220,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">王雨轩</h5>
-                                <p class="card-text">锤子大王王雨轩，伟大无需多言，五班土木工程伟大事业之开端乃源于王雨轩携带其父之兵器——铁锤于五班。一代天骄，星舰小纪，只识大锤打螺丝，为及时雨吴海燕所察觉，手脚并用倒拔螺丝刀后收缴雨轩王之兵器，怎料次日白衣秀士赵谦硕舍身取回王雨轩之神器。此铁锤事变固然兵败，但其开创了五班土木工程的先河，为后文中zz携带电钻打下铺垫。</p>
+                                <p class="card-text">　　锤子大王王雨轩，伟大无需多言，五班土木工程伟大事业之开端乃源于王雨轩携带其父之兵器——铁锤于五班。一代天骄，星舰小纪，只识大锤打螺丝，为及时雨吴海燕所察觉，手脚并用倒拔螺丝刀后收缴雨轩王之兵器，怎料次日白衣秀士赵谦硕舍身取回王雨轩之神器。此铁锤事变固然兵败，但其开创了五班土木工程的先河，为后文中zz携带电钻打下铺垫。</p>
                             </div>
                         </div>
                     </div>
@@ -252,7 +228,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">纪行键</h5>
-                                <p class="card-text">扫把星大王纪星舰，代表事迹《纪提辖大锤怒敲黑旋风大腿骨》《小纪引来及时雨，吴海燕怒收赵谦硕铁锤》，江湖人称小纪罢，善于操弄各种兵器，在铁锤电钻方面颇有建树。此人所神之处在于，凡为珍宝者置于此人之手，不出一时辰必引来及时雨收缴，使锤子大王王雨轩与香烟大王赵谦硕闻风丧胆。</p>
+                                <p class="card-text">　　扫把星大王纪星舰，代表事迹《纪提辖大锤怒敲黑旋风大腿骨》《小纪引来及时雨，吴海燕怒收赵谦硕铁锤》，江湖人称小纪罢，善于操弄各种兵器，在铁锤电钻方面颇有建树。此人所神之处在于，凡为珍宝者置于此人之手，不出一时辰必引来及时雨收缴，使锤子大王王雨轩与香烟大王赵谦硕闻风丧胆。</p>
                             </div>
                         </div>
                     </div>
@@ -260,7 +236,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">赵谦硕</h5>
-                                <p class="card-text">体育健将，擅长篮球和足球。</p>
+                                <p class="card-text">　　体育健将，擅长篮球和足球。</p>
                             </div>
                         </div>
                     </div>
@@ -268,7 +244,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">谈颛毓</h5>
-                                <p class="card-text">音乐才子，擅长钢琴和吉他。</p>
+                                <p class="card-text">　　音乐才子，擅长钢琴和吉他。</p>
                             </div>
                         </div>
                     </div>
@@ -276,7 +252,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">张哲</h5>
-                                <p class="card-text">绘画天才，多次在美术比赛中获奖。</p>
+                                <p class="card-text">　　绘画天才，多次在美术比赛中获奖。</p>
                             </div>
                         </div>
                     </div>
@@ -293,24 +269,4 @@
         </div>
     </div>
 </body>
-<script>
-function toggleImages(id) {
-    var additionalImages = document.getElementById(id);
-    if (additionalImages.style.display === 'none' || additionalImages.style.maxHeight === '0px') {
-        additionalImages.style.display = 'block';
-        additionalImages.style.maxHeight = additionalImages.scrollHeight + 'px';
-        setTimeout(function() {
-            additionalImages.scrollIntoView({ behavior: 'smooth' }); // 滚动到图片区域
-        }, 10); // 确保 maxHeight 已经设置
-    } else {
-        additionalImages.style.maxHeight = '0';
-        setTimeout(function() {
-            additionalImages.style.display = 'none';
-            setTimeout(function() {
-                additionalImages.scrollIntoView({ behavior: 'smooth' }); // 确保再次展开时跟随
-            }, 10); // 确保 display 已经设置
-        }, 500); // 与 transition 时间相同
-    }
-}
-</script>
 </html>
