@@ -213,6 +213,24 @@
         </div>
 
         <div class="content-section" id="teachers">
+            <!-- 教师详情页容器 -->
+            <div id="teacherDetail" class="teacher-detail">
+                <!-- 详情页内容将通过JavaScript动态加载 -->
+            </div>
+
+            <!-- 教师dock栏 -->
+            <div class="teacher-dock">
+                <div class="dock-item" data-subject="语文" onclick="showTeacherDetail('语文')">语文</div>
+                <div class="dock-item" data-subject="数学" onclick="showTeacherDetail('数学')">数学</div>
+                <div class="dock-item" data-subject="英语" onclick="showTeacherDetail('英语')">英语</div>
+                <div class="dock-item" data-subject="物理" onclick="showTeacherDetail('物理')">物理</div>
+                <div class="dock-item" data-subject="化学" onclick="showTeacherDetail('化学')">化学</div>
+                <div class="dock-item" data-subject="政治" onclick="showTeacherDetail('政治')">政治</div>
+                <div class="dock-item" data-subject="历史" onclick="showTeacherDetail('历史')">历史</div>
+                <div class="dock-item" data-subject="生物" onclick="showTeacherDetail('生物')">生物</div>
+                <div class="dock-item" data-subject="地理" onclick="showTeacherDetail('地理')">地理</div>
+            </div>
+
             <div class="profile-card animate-fade-in">
                 <h2>任课教师</h2>
                 <div class="row g-4">
@@ -366,5 +384,12 @@
             <a>| 江苏省江都中学 | 请遵守中国法律法规</a>
         </div>
     </div>
+
+    <!-- 添加图片预览模态框 -->
+    <div class="image-preview-modal" id="imagePreviewModal" onclick="closeImagePreview()">
+        <span class="close-preview">&times;</span>
+        <img id="previewImage" src="" alt="预览图片">
+    </div>
+
 </body>
 </html>

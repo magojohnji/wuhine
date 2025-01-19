@@ -171,6 +171,7 @@ body {
     flex-direction: column;
     min-height: calc(100vh - 60px); /* 确保内容区域填满剩余高度 */
     padding-bottom: 0; /* 移除底部内边距 */
+    margin-right: 100px; /* 为圆形dock栏留出空间 */
 }
 
 .main-content.collapsed {
@@ -377,6 +378,20 @@ copyright-text img {
     z-index: 2;
 }
 
+/* 展开按钮样式优化 */
+.collapse-toggle {
+    position: relative;
+    z-index: 10;
+    padding: 8px 16px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.activity-card .collapse-toggle {
+    position: relative;
+    z-index: 3; /* 确保按钮在图片点击区域上层 */
+}
+
 .additional-images {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -425,8 +440,192 @@ copyright-text img {
     margin-top: 2rem;
 }
 
+/* 教师详情容器 */
+.teacher-detail {
+    display: flex;
+    position: fixed;
+    left: 250px; /* 侧边栏宽度 */
+    right: 100px; /* 为圆形dock栏留出空间 */
+    top: 60px; /* 顶栏高度 */
+    bottom: 0;
+    background: var(--bg-color);
+    padding: 20px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.teacher-detail.active {
+    display: block;
+    animation: slideIn 0.3s ease-out;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.teacher-detail.closing {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 教师dock栏 */
+.teacher-dock {
+    position: fixed;
+    right: 20px; /* 调整右边距，给圆形留出空间 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    background: transparent;
+    border-left: none;
+    overflow: visible;
+    z-index: 999;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dock-item {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-color);
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.dock-item:hover {
+    transform: scale(1.1);
+    background: var(--link-color);
+    color: white;
+    border-color: var(--link-color);
+}
+
+.dock-item.active {
+    background: var(--link-color);
+    color: white;
+    border-color: var(--link-color);
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 图片预览模态框样式 */
+.image-preview-modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 2000;
+    cursor: pointer;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-preview-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.image-preview-modal img {
+    max-width: 95%;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-preview-modal.active img {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.close-preview {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.image-preview-modal.active .close-preview {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+/* 为可点击图片添加样式 */
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.clickable-image:hover {
+    transform: scale(1.02);
+}
+
 /* 移动端适配 */
 @media (max-width: 768px) {
+    .teacher-detail {
+        left: 0;
+        right: 70px;
+    }
+    
+    .teacher-dock {
+        right: 10px;
+    }
+    
+    .dock-item {
+        width: 40px;
+        height: 40px;
+        font-size: 0.8rem;
+    }
+    
+    .main-content {
+        margin-right: 70px;
+    }
+    
     .copyright-text {
         padding: 1rem 0;
         gap: 0.2rem 0.5rem; /* 垂直间距更小，水平间距更大 */
