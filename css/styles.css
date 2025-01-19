@@ -395,6 +395,36 @@ copyright-text img {
     transform: scale(1.05);
 }
 
+/* 教师卡片样式 */
+.teacher-card {
+    transition: transform 0.3s ease;
+}
+
+.teacher-card:hover {
+    transform: translateY(-5px);
+}
+
+.teacher-card .card {
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+}
+
+.teacher-card .card-title {
+    color: var(--link-color);
+    margin-bottom: 0.5rem;
+}
+
+.teacher-card .teacher-name {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.teachers-grid {
+    margin-top: 2rem;
+}
+
 /* 移动端适配 */
 @media (max-width: 768px) {
     .copyright-text {
