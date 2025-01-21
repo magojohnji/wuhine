@@ -663,6 +663,91 @@ copyright-text img {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+/* 班级荣誉样式 */
+.honors-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+    margin-top: 1rem;
+}
+
+.honor-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.honor-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.honor-item h4 {
+    color: var(--link-color);
+    margin-bottom: 1.5rem;
+    font-family: 'PingFang-Medium', sans-serif;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--link-color);
+}
+
+.honor-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.honor-item ul li {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.honor-item ul li::before {
+    content: '🏆';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .honor-item {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] .honor-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .honors-list {
+        gap: 1rem;
+    }
+    
+    .honor-item {
+        padding: 1rem;
+    }
+    
+    .honor-item h4 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .honor-item ul li {
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
 /* 移动端适配 */
 @media (max-width: 768px) {
     .teacher-detail {
