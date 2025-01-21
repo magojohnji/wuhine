@@ -70,6 +70,29 @@ body {
     opacity: 0.9;
 }
 
+/* 暗色模式下优化文本显示 */
+[data-theme="dark"] .teacher-detail p {
+    color: #e0e0e0;
+    opacity: 0.95;
+}
+
+[data-theme="dark"] .teacher-detail .text-muted {
+    color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .teacher-detail h6 {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .teacher-detail h5 {
+    color: var(--link-color);
+}
+
+[data-theme="dark"] .teacher-detail pre {
+    color: #e0e0e0;
+    background-color: #404040;
+}
+
 /* 侧边栏基本样式 */
 .sidebar {
     width: 250px;
@@ -611,50 +634,33 @@ copyright-text img {
     transform: scale(1.02);
 }
 
-/* 班级荣誉样式 */
-.honors-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 1rem 0;
+/* PDF预览模态框样式 */
+#pdfViewer {
+    overflow: auto;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
 }
 
-.honor-item {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 1.5rem;
+#pdfViewer canvas {
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 为名师工作室描述文本添加特殊样式 */
+.teacher-detail p[style*="white-space: pre-line"] {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--card-bg);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
 }
 
-.honor-item:hover {
-    transform: translateY(-5px);
-}
-
-.honor-item h4 {
-    color: var(--link-color);
-    margin-bottom: 1rem;
-    font-family: 'PingFang-Medium', sans-serif;
-}
-
-.honor-item ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.honor-item ul li {
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.honor-item ul li::before {
-    content: '🏆';
-    position: absolute;
-    left: 0;
-    top: 0;
+[data-theme="dark"] .teacher-detail p[style*="white-space: pre-line"] {
+    background-color: #363636;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 /* 移动端适配 */
