@@ -789,3 +789,39 @@ copyright-text img {
 @media (max-width: 576px) {
     /* ...existing code... */
 }
+
+/* PDF按钮样式 */
+.pdf-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--link-color);
+    border-radius: 6px;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.pdf-button:hover {
+    background-color: var(--link-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pdf-button i {
+    font-size: 1.1em;
+}
+
+[data-theme="dark"] .pdf-button {
+    background-color: var(--card-bg);
+}
+
+[data-theme="dark"] .pdf-button:hover {
+    background-color: var(--link-color);
+    color: white;
+}

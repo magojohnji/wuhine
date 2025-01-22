@@ -390,11 +390,14 @@ function showTeacherDetail(subject) {
                         
                         ${(subject === '物理' || subject === '数学' || subject === '历史') && teacher.publications ? `
                         <h5 class="mt-4 mb-3">期刊投稿</h5>
-                        <ul class="list-unstyled">
+                        <div class="d-flex flex-column">
                             ${teacher.publications.map(pub => 
-                                `<li class="mb-2"><a href="#" onclick="openPdfPreview('${pub.file}')" class="text-primary">• ${pub.title}</a></li>`
+                                `<button class="pdf-button" onclick="openPdfPreview('${pub.file}')">
+                                    <i class="fas fa-file-pdf"></i>
+                                    ${pub.title}
+                                </button>`
                             ).join('')}
-                        </ul>
+                        </div>
                         ` : ''}
                         
                         ${subject === '数学' && teacher.projects ? `
