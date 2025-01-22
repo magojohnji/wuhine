@@ -825,3 +825,61 @@ copyright-text img {
     background-color: var(--link-color);
     color: white;
 }
+
+/* 评论区样式 */
+.comments-section {
+    margin: 2rem 0;
+}
+
+.comments-section .profile-card {
+    margin-bottom: 0;
+}
+
+#github-comments {
+    margin-top: 1rem;
+}
+
+[data-theme="dark"] #github-comments {
+    color: var(--text-color);
+}
+
+/* 加载遮罩层样式 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+[data-theme="dark"] .loading-overlay {
+    background-color: rgba(44, 44, 44, 0.9);
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid var(--border-color);
+    border-top: 5px solid var(--link-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    position: absolute;
+    margin-top: 80px;
+    color: var(--text-color);
+    font-family: 'PingFang-Medium', sans-serif;
+    font-size: 1.1rem;
+}

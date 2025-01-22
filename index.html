@@ -56,8 +56,49 @@
             // 页面加载时检测浏览器
             checkBrowser();
         </script>
+        <script>
+            let commentsLoaded = false;
+
+            // 修改页面加载进度监听
+            document.onreadystatechange = function() {
+                if (document.readyState === 'complete') {
+                    // 等待评论加载完成
+                    checkAllContentLoaded();
+                }
+            };
+
+            // 检查所有内容是否加载完成
+            function checkAllContentLoaded() {
+                if (commentsLoaded) {
+                    const loadingOverlay = document.getElementById('loadingOverlay');
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingOverlay.style.display = 'none';
+                    }, 300);
+                }
+            }
+
+            // 确保在超时后也会移除加载遮罩（15秒后）
+            window.addEventListener('load', function() {
+                setTimeout(() => {
+                    const loadingOverlay = document.getElementById('loadingOverlay');
+                    if (loadingOverlay && loadingOverlay.style.display !== 'none') {
+                        loadingOverlay.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingOverlay.style.display = 'none';
+                        }, 300);
+                    }
+                }, 15000); // 增加到15秒
+            });
+        </script>
     </head>
 <body>
+    <!-- 添加加载遮罩层 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">正在加载页面内容...</div>
+    </div>
+
     <!-- 添加打开侧栏按钮 -->
     <button class="open-sidebar" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
@@ -428,7 +469,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">韩沐垚</h5>
-                                <p class="card-text">　　韩沐垚，数学天才，擅长解答复杂的数学问题，曾在多次数学竞赛中获奖。</p>
+                                <<p class="card-text">　　韩沐垚，数学天才，擅长解答复杂的数学问题，曾在多次数学竞赛中获奖。</p>
                             </div>
                         </div>
                     </div>
@@ -443,8 +484,17 @@
                 </div>
             </div>
         </div>
+
+        <!-- 添加通用评论区容器 -->
+        <div class="comments-section">
+            <div class="profile-card animate-fade-in">
+                <h4 class="mb-4">评论区</h4>
+                <!-- 修改评论框的容器 ID 并将脚本移至此处 -->
+                <div id="comments-container"></div>
+            </div>
+        </div>
         
-        <!-- 在最后添加版权信息 -->
+        <!-- 版权信息 -->
         <div class="copyright-text">
             <a>Copyright &copy; 高一 ⑸ 班 2025 |</a>
             <a title="本站支持 IPv6 访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问" src="image/ipv6-certified-s1.svg"></a>
@@ -474,5 +524,46 @@
         </div>
     </div>
 
+    <!-- 将评论脚本修改为函数形式并移到 body 结束标签之前 -->
+    <script>
+        // 初始化评论系统
+        function initComments() {
+            const script = document.createElement('script');
+            script.src = 'https://utteranc.es/client.js';
+            script.setAttribute('repo', 'magojohnji/wuhine');
+            script.setAttribute('issue-term', 'pathname');
+            script.setAttribute('theme', 'preferred-color-scheme');
+            script.setAttribute('crossorigin', 'anonymous');
+            script.setAttribute('async', true);
+            
+            // 添加评论加载完成的监听
+            script.onload = function() {
+                // 等待评论框架完全加载
+                setTimeout(() => {
+                    commentsLoaded = true;
+                    checkAllContentLoaded();
+                }, 1000); // 给评论框架1秒钟加载时间
+            };
+            
+            const container = document.getElementById('comments-container');
+            container.innerHTML = '';
+            container.appendChild(script);
+        }
+
+        // 在页面加载完成后初始化评论
+        document.addEventListener('DOMContentLoaded', initComments);
+
+        // 在切换页面内容时重新初始化评论
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const existingClickHandler = link.onclick;
+            link.onclick = (e) => {
+                if (existingClickHandler) {
+                    existingClickHandler(e);
+                }
+                commentsLoaded = false; // 重置评论加载状态
+                setTimeout(initComments, 100);
+            };
+        });
+    </script>
 </body>
 </html>
