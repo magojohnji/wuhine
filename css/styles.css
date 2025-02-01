@@ -176,11 +176,88 @@ body {
     .sidebar:not(.collapsed) {
         transform: translateX(0);
     }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .teacher-detail {
+        left: 0;
+        right: 0;
+        top: 60px;
+        bottom: 0;
+        padding: 10px;
+    }
+
+    .teacher-dock {
+        right: 10px;
+    }
+
+    .dock-item {
+        width: 50px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    .dock-item:hover,
+    .dock-item:active,
+    .dock-item.active {
+        transform: scale(1.05) translateX(-3px);
+    }
+
+    .copyright-text {
+        padding: 1rem 0;
+        gap: 0.2rem 0.5rem;
+        max-width: 100%;
+        justify-content: center;
+        flex-flow: row wrap;
+        height: auto;
+    }
 }
 
 /* 桌面端布局 */
 @media (min-width: 1025px) {
     /* ...existing code... */
+}
+
+/* 小屏幕设备优化 */
+@media (max-width: 576px) {
+    .sidebar {
+        padding: 1rem;
+    }
+
+    .top-bar {
+        padding: 0 1rem;
+    }
+
+    .main-content {
+        padding: 1rem;
+        margin-right: 0;
+    }
+
+    .profile-card {
+        padding: 1rem;
+    }
+
+    .teacher-detail {
+        padding: 10px;
+    }
+
+    .teacher-dock {
+        right: 5px;
+    }
+
+    .dock-item {
+        width: 45px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+
+    .copyright-text {
+        padding: 0.5rem 0;
+        gap: 0.1rem 0.3rem;
+    }
 }
 
 /* 内容区布局 */
@@ -194,7 +271,12 @@ body {
     flex-direction: column;
     min-height: calc(100vh - 60px); /* 确保内容区域填满剩余高度 */
     padding-bottom: 0; /* 移除底部内边距 */
-    margin-right: 100px; /* 为圆形dock栏留出空间 */
+    margin-right: 0; /* 移除默认的右侧边距 */
+}
+
+/* 只在教师页面添加右侧边距 */
+#teachers {
+    margin-right: 100px;
 }
 
 .main-content.collapsed {
@@ -882,4 +964,16 @@ copyright-text img {
     color: var(--text-color);
     font-family: 'PingFang-Medium', sans-serif;
     font-size: 1.1rem;
+}
+
+/* 响应式布局调整 */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    #teachers {
+        margin-right: 70px;
+    }
 }

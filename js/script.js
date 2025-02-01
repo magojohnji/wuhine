@@ -353,7 +353,7 @@ function showTeacherDetail(subject) {
                     <div class="col-md-8">
                         ${subject === '英语' ? `
                             <div class="text-center mb-4">
-                                <img src="image/wuhine.jpg" alt="吴海燕老师" class="rounded-circle" style="width: 150px;">
+                                <img src="image/teacher/Haiyan_Wu.jpg" alt="吴海燕老师" class="rounded-circle" style="width: 150px;">
                             </div>
                         ` : ''}
                         <h5 class="mb-3">教师简介</h5>
@@ -499,7 +499,7 @@ function closeImagePreview() {
 }
 
 // 初始化PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
 
 // PDF预览函数
 async function openPdfPreview(pdfPath) {
