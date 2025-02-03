@@ -1,0 +1,11 @@
+
+/* ...existing code... */
+
+/* 删除以下评论区相关样式 */
+.comment-list,
+.respond-wrap,
+.comment-form {
+    display: none;
+}
+
+/* ...existing code... */

@@ -50,6 +50,49 @@ body {
     --muted-color: #a0a0a0;   /* 添加暗色主题下的次要文字颜色 */
 }
 
+/* 卡片样式适配暗色模式 */
+[data-theme="dark"] .card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .card-body {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .card-title {
+    color: var(--link-color);
+}
+
+[data-theme="dark"] .card-text {
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+/* 暗色模式下优化文本显示 */
+[data-theme="dark"] .teacher-detail p {
+    color: #e0e0e0;
+    opacity: 0.95;
+}
+
+[data-theme="dark"] .teacher-detail .text-muted {
+    color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .teacher-detail h6 {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .teacher-detail h5 {
+    color: var(--link-color);
+}
+
+[data-theme="dark"] .teacher-detail pre {
+    color: #e0e0e0;
+    background-color: #404040;
+}
+
 /* 侧边栏基本样式 */
 .sidebar {
     width: 250px;
@@ -133,11 +176,88 @@ body {
     .sidebar:not(.collapsed) {
         transform: translateX(0);
     }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .teacher-detail {
+        left: 0;
+        right: 0;
+        top: 60px;
+        bottom: 0;
+        padding: 10px;
+    }
+
+    .teacher-dock {
+        right: 10px;
+    }
+
+    .dock-item {
+        width: 50px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    .dock-item:hover,
+    .dock-item:active,
+    .dock-item.active {
+        transform: scale(1.05) translateX(-3px);
+    }
+
+    .copyright-text {
+        padding: 1rem 0;
+        gap: 0.2rem 0.5rem;
+        max-width: 100%;
+        justify-content: center;
+        flex-flow: row wrap;
+        height: auto;
+    }
 }
 
 /* 桌面端布局 */
 @media (min-width: 1025px) {
     /* ...existing code... */
+}
+
+/* 小屏幕设备优化 */
+@media (max-width: 576px) {
+    .sidebar {
+        padding: 1rem;
+    }
+
+    .top-bar {
+        padding: 0 1rem;
+    }
+
+    .main-content {
+        padding: 1rem;
+        margin-right: 0;
+    }
+
+    .profile-card {
+        padding: 1rem;
+    }
+
+    .teacher-detail {
+        padding: 10px;
+    }
+
+    .teacher-dock {
+        right: 5px;
+    }
+
+    .dock-item {
+        width: 45px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+
+    .copyright-text {
+        padding: 0.5rem 0;
+        gap: 0.1rem 0.3rem;
+    }
 }
 
 /* 内容区布局 */
@@ -151,6 +271,12 @@ body {
     flex-direction: column;
     min-height: calc(100vh - 60px); /* 确保内容区域填满剩余高度 */
     padding-bottom: 0; /* 移除底部内边距 */
+    margin-right: 0; /* 移除默认的右侧边距 */
+}
+
+/* 只在教师页面添加右侧边距 */
+#teachers {
+    margin-right: 100px;
 }
 
 .main-content.collapsed {
@@ -325,110 +451,412 @@ copyright-text img {
     gap: 0.5rem;
 }
 
-/* 可展开卡片样式 */
-.expandable-card {
-    transition: all 0.3s ease-in-out;
-}
-
-.expandable-card .expanded-content {
-    display: none;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.expandable-card.expanded .expanded-content {
-    display: block;
-}
-
-.expandable-card .expand-btn {
-    color: var(--link-color);
-    padding: 0;
-    margin-top: 1rem;
-}
-
-.expandable-card.expanded .preview-text {
-    display: none;
-}
-
-.expandable-card .expand-btn:hover {
-    text-decoration: underline;
-}
-
-/* 可点击卡片样式 */
-.clickable-card {
+/* 保留并优化活动卡片相关样式 */
+.activity-card {
     position: relative;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 1rem;
 }
 
-.clickable-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-.clickable-card a {
+.activity-card::before {
+    content: '';
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+    border-radius: 10px;
+}
+
+.activity-card button {
+    position: relative;
+    z-index: 2;
+}
+
+/* 展开按钮样式优化 */
+.collapse-toggle {
+    position: relative;
+    z-index: 10;
+    padding: 8px 16px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.activity-card .collapse-toggle {
+    position: relative;
+    z-index: 3; /* 确保按钮在图片点击区域上层 */
+}
+
+.additional-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.additional-images img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.additional-images img:hover {
+    transform: scale(1.05);
+}
+
+/* 教师卡片样式 */
+.teacher-card {
+    transition: transform 0.3s ease;
+}
+
+.teacher-card:hover {
+    transform: translateY(-5px);
+}
+
+.teacher-card .card {
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+}
+
+.teacher-card .card-title {
+    color: var(--link-color);
+    margin-bottom: 0.5rem;
+}
+
+.teacher-card .teacher-name {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.teachers-grid {
+    margin-top: 2rem;
+}
+
+/* 教师详情容器 */
+.teacher-detail {
+    display: flex;
+    position: fixed;
+    left: 250px; /* 侧边栏宽度 */
+    right: 100px; /* 为圆形dock栏留出空间 */
+    top: 60px; /* 顶栏高度 */
+    bottom: 0;
+    background: var(--bg-color);
+    padding: 20px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.teacher-detail.active {
+    display: block;
+    animation: slideIn 0.3s ease-out;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.teacher-detail.closing {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 教师dock栏 */
+.teacher-dock {
+    position: fixed;
+    right: 20px; /* 调整右边距，给圆形留出空间 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    background: transparent;
+    border-left: none;
+    overflow: visible;
+    z-index: 999;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 减小间距使其更紧凑 */
+}
+
+.dock-item {
+    width: 60px; /* 增加宽度 */
+    height: 36px; /* 减小高度 */
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* 改为圆角长方形 */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-color);
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    right: 0;
+}
+
+.dock-item:hover {
+    transform: scale(1.05) translateX(-5px);
+    background: var(--link-color);
+    color: white;
+    border-color: var(--link-color);
+}
+
+.dock-item:active {
+    transform: scale(0.95) translateX(-5px);
+}
+
+.dock-item.active {
+    background: var(--link-color);
+    color: white;
+    border-color: var(--link-color);
+    transform: scale(1.1) translateX(-8px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* 图片预览模态框样式 */
+.image-preview-modal {
+    display: flex;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 2000;
+    cursor: pointer;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    justify-content: center;
+    align-items: center;
 }
 
-/* 面包屑导航样式 */
-.breadcrumb {
-    background-color: var(--card-bg);
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
+.image-preview-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.image-preview-modal img {
+    max-width: 95%;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-preview-modal.active img {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.close-preview {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.image-preview-modal.active .close-preview {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+/* 为可点击图片添加样式 */
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.clickable-image:hover {
+    transform: scale(1.02);
+}
+
+/* PDF预览模态框样式 */
+#pdfViewer {
+    overflow: auto;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#pdfViewer canvas {
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 为名师工作室描述文本添加特殊样式 */
+.teacher-detail p[style*="white-space: pre-line"] {
+    line-height: 1.8;
     margin-bottom: 1.5rem;
-    border: 1px solid var(--border-color);
-    display: flex;
-    align-items: center; /* 添加垂直居中对齐 */
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.breadcrumb-item {
-    display: flex;
-    align-items: center; /* 确保每个项目也垂直居中 */
+[data-theme="dark"] .teacher-detail p[style*="white-space: pre-line"] {
+    background-color: #363636;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.breadcrumb-item a {
-    color: var(--link-color);
-    text-decoration: none;
-    padding: 0.3rem 0.8rem;
-    border-radius: 1rem;
-    background-color: var(--sidebar-bg);
+/* 班级荣誉样式 */
+.honors-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+    margin-top: 1rem;
+}
+
+.honor-item {
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
-    display: inline-flex; /* 改为 inline-flex */
-    align-items: center; /* 文字垂直居中 */
 }
 
-.breadcrumb-item a:hover {
-    background-color: var(--link-color);
-    color: white;
+.honor-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.breadcrumb-item.active {
+.honor-item h4 {
+    color: var(--link-color);
+    margin-bottom: 1.5rem;
+    font-family: 'PingFang-Medium', sans-serif;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--link-color);
+}
+
+.honor-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.honor-item ul li {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
     color: var(--text-color);
-    padding: 0.3rem 0.8rem;
-    border-radius: 1rem;
-    background-color: var(--sidebar-bg);
-    border: 1px solid var(--border-color);
-    display: inline-flex; /* 改为 inline-flex */
-    align-items: center; /* 文字垂直居中 */
+    line-height: 1.5;
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
-    color: var(--text-color);
-    content: "›";
-    font-size: 1.2em;
-    line-height: 1;
-    padding: 0 0.5rem;
+.honor-item ul li::before {
+    content: '🏆';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .honor-item {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] .honor-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* 移动端适配 */
 @media (max-width: 768px) {
+    .honors-list {
+        gap: 1rem;
+    }
+    
+    .honor-item {
+        padding: 1rem;
+    }
+    
+    .honor-item h4 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .honor-item ul li {
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .teacher-detail {
+        left: 0;
+        right: 70px;
+    }
+    
+    .teacher-dock {
+        right: 10px;
+    }
+    
+    .dock-item {
+        width: 50px; /* 移动端稍微窄一点 */
+        height: 32px;
+        font-size: 0.85rem;
+    }
+    
+    .dock-item:hover,
+    .dock-item:active,
+    .dock-item.active {
+        transform: scale(1.05) translateX(-3px);
+    }
+    
+    .main-content {
+        margin-right: 70px;
+    }
+    
     .copyright-text {
         padding: 1rem 0;
         gap: 0.2rem 0.5rem; /* 垂直间距更小，水平间距更大 */
@@ -443,3 +871,144 @@ copyright-text img {
 @media (max-width: 576px) {
     /* ...existing code... */
 }
+
+/* PDF按钮样式 */
+.pdf-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--link-color);
+    border-radius: 6px;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.pdf-button:hover {
+    background-color: var(--link-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pdf-button i {
+    font-size: 1.1em;
+}
+
+[data-theme="dark"] .pdf-button {
+    background-color: var(--card-bg);
+}
+
+[data-theme="dark"] .pdf-button:hover {
+    background-color: var(--link-color);
+    color: white;
+}
+
+/* 评论区样式 */
+.comments-section {
+    margin: 2rem 0;
+}
+
+.comments-section .profile-card {
+    margin-bottom: 0;
+}
+
+#github-comments {
+    margin-top: 1rem;
+}
+
+[data-theme="dark"] #github-comments {
+    color: var(--text-color);
+}
+
+/* 加载遮罩层样式 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+[data-theme="dark"] .loading-overlay {
+    background-color: rgba(44, 44, 44, 0.9);
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid var(--border-color);
+    border-top: 5px solid var(--link-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    position: absolute;
+    margin-top: 80px;
+    color: var(--text-color);
+    font-family: 'PingFang-Medium', sans-serif;
+    font-size: 1.1rem;
+}
+
+/* 响应式布局调整 */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    #teachers {
+        margin-right: 70px;
+    }
+}
+
+/* ...existing code... */
+
+.message-divider {
+    margin: 0 10px;
+    color: #666;
+}
+
+.teacher-message {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+/* 在移动设备上调整显示 */
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 1rem; /* 稍微减小站点标题大小 */
+    }
+    
+    .message-divider {
+        margin: 0 5px; /* 减小分隔符间距 */
+    }
+    
+    .teacher-message {
+        font-size: 12px; /* 稍微减小字体大小 */
+        flex: 1; /* 允许文本占据剩余空间 */
+        min-width: 0; /* 防止文本溢出 */
+        overflow: hidden; /* 隐藏溢出内容 */
+        text-overflow: ellipsis; /* 显示省略号 */
+        white-space: nowrap; /* 防止换行 */
+    }
+}
+
+/* ...existing code... */
