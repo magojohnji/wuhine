@@ -57,26 +57,16 @@
             checkBrowser();
         </script>
         <script>
-            let commentsLoaded = false;
-
             // 修改页面加载进度监听
             document.onreadystatechange = function() {
                 if (document.readyState === 'complete') {
-                    // 等待评论加载完成
-                    checkAllContentLoaded();
-                }
-            };
-
-            // 检查所有内容是否加载完成
-            function checkAllContentLoaded() {
-                if (commentsLoaded) {
                     const loadingOverlay = document.getElementById('loadingOverlay');
                     loadingOverlay.style.opacity = '0';
                     setTimeout(() => {
                         loadingOverlay.style.display = 'none';
                     }, 300);
                 }
-            }
+            };
 
             // 确保在超时后也会移除加载遮罩（15秒后）
             window.addEventListener('load', function() {
@@ -108,6 +98,8 @@
     <div class="top-bar">
         <div class="left-section">
             <span class="site-title">伍班E站</span>
+            <span class="message-divider">|</span>
+            <span class="teacher-message" id="teacherMessage"></span>
         </div>
         <div class="right-section">
             <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
@@ -201,15 +193,29 @@
                 </div>
                 <div class="profile-card animate-fade-in">
                     <h2 class="mb-4">羽毛球比赛</h2>
-                    <div class="activity-card" style="background-image: url('image/Yi-Zheng/badminton1.jpeg');">
+                    <div class="activity-card" style="background-image: url('image/badmintonCompetition/cheerers.jpeg');">
                         <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBadminton" aria-expanded="false">
                             展开
                         </button>
                     </div>
                     <div class="collapse" id="collapseBadminton">
                         <div class="additional-images">
-                            <img src="image/Yi-Zheng/badminton2.jpeg" class="img-fluid rounded mb-4" alt="羽毛球比赛场景1">
-                            <img src="image/Yi-Zheng/badminton3.jpeg" class="img-fluid rounded mb-4" alt="羽毛球比赛场景2">
+                            <video class="img-fluid rounded mb-4" controls>
+                                <source src="image/badmintonCompetition/video1.mp4" type="video/mp4">
+                                您的浏览器不支持视频标签。
+                            </video>
+                            <video class="img-fluid rounded mb-4" controls>
+                                <source src="image/badmintonCompetition/video2.mp4" type="video/mp4">
+                                您的浏览器不支持视频标签。
+                            </video>
+                            <video class="img-fluid rounded mb-4" controls>
+                                <source src="image/badmintonCompetition/video3.mp4" type="video/mp4">
+                                您的浏览器不支持视频标签。
+                            </video>
+                            <video class="img-fluid rounded mb-4" controls>
+                                <source src="image/badmintonCompetition/video4.mp4" type="video/mp4">
+                                您的浏览器不支持视频标签。
+                            </video>
                         </div>
                         <div class="content">
                             <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
@@ -219,15 +225,15 @@
                 </div>
                 <div class="profile-card animate-fade-in">
                     <h2 class="mb-4">运动会</h2>
-                    <div class="activity-card" style="background-image: url('image/Yi-Zheng/sports1.jpeg');">
+                    <div class="activity-card" style="background-image: url('image/theSportsMeeting_12_Oct_2024/theSportsMeeting_3.jpeg');">
                         <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSports" aria-expanded="false">
                             展开
                         </button>
                     </div>
                     <div class="collapse" id="collapseSports">
                         <div class="additional-images">
-                            <img src="image/Yi-Zheng/sports2.jpeg" class="img-fluid rounded mb-4" alt="运动会场景1">
-                            <img src="image/Yi-Zheng/sports3.jpeg" class="img-fluid rounded mb-4" alt="运动会场景2">
+                            <img src="image/theSportsMeeting_12_Oct_2024/theSportsMeeting_35.jpeg" class="img-fluid rounded mb-4" alt="运动会场景1">
+                            <img src="image/theSportsMeeting_12_Oct_2024/theSportsMeeting_36.jpeg" class="img-fluid rounded mb-4" alt="运动会场景2">
                         </div>
                         <div class="content">
                             <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
@@ -235,6 +241,35 @@
                         </div>
                     </div>
                 </div>
+                <div class="profile-card animate-fade-in">
+                    <h2 class="mb-4">元旦晚会</h2>
+                    <div class="activity-card" style="background-image: url('image/newYearParty/image/newYearsEveParty_image_2.jpeg');">
+                        <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewYear" aria-expanded="false">
+                            展开
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseNewYear">
+                        <div class="additional-images">
+                            <video class="img-fluid rounded mb-4" controls>
+                                <source src="image/newYearParty/video/howToMakeSeaSalt.mp4" type="video/mp4">
+                                您的浏览器不支持视频标签。
+                            </video>
+                            <video class="img-fluid rounded mb-4" controls>
+                                <source src="image/newYearParty/video/heavyTaste.mp4" type="video/mp4">
+                                您的浏览器不支持视频标签。
+                            </video>
+                            <video class="img-fluid rounded mb-4" controls>
+                                <source src="image/newYearParty/video/politicsTeachersProgram.mp4" type="video/mp4">
+                                您的浏览器不支持视频标签。
+                            </video>
+                        </div>
+                        <div class="content">
+                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
+                                　　在2024年元旦晚会上，我班同学们积极参与表演，展现了丰富多彩的才艺，为全校师生献上了精彩的节目，充分展示了我班的文艺风采。</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -469,7 +504,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">韩沐垚</h5>
-                                <<p class="card-text">　　韩沐垚，数学天才，擅长解答复杂的数学问题，曾在多次数学竞赛中获奖。</p>
+                                <p class="card-text">　　韩沐垚，数学天才，擅长解答复杂的数学问题，曾在多次数学竞赛中获奖。</p>
                             </div>
                         </div>
                     </div>
@@ -485,15 +520,6 @@
             </div>
         </div>
 
-        <!-- 添加通用评论区容器 -->
-        <div class="comments-section">
-            <div class="profile-card animate-fade-in">
-                <h4 class="mb-4">评论区</h4>
-                <!-- 修改评论框的容器 ID 并将脚本移至此处 -->
-                <div id="comments-container"></div>
-            </div>
-        </div>
-        
         <!-- 版权信息 -->
         <div class="copyright-text">
             <a>Copyright &copy; 高一 ⑸ 班 2025 |</a>
@@ -524,46 +550,30 @@
         </div>
     </div>
 
-    <!-- 将评论脚本修改为函数形式并移到 body 结束标签之前 -->
     <script>
-        // 初始化评论系统
-        function initComments() {
-            const script = document.createElement('script');
-            script.src = 'https://utteranc.es/client.js';
-            script.setAttribute('repo', 'magojohnji/wuhine');
-            script.setAttribute('issue-term', 'pathname');
-            script.setAttribute('theme', 'preferred-color-scheme');
-            script.setAttribute('crossorigin', 'anonymous');
-            script.setAttribute('async', true);
-            
-            // 添加评论加载完成的监听
-            script.onload = function() {
-                // 等待评论框架完全加载
-                setTimeout(() => {
-                    commentsLoaded = true;
-                    checkAllContentLoaded();
-                }, 1000); // 给评论框架1秒钟加载时间
-            };
-            
-            const container = document.getElementById('comments-container');
-            container.innerHTML = '';
-            container.appendChild(script);
+        // 在 body 结束标签前添加以下脚本
+        const messages = [
+            "一个巴掌拍不响，你不理别人，别人不就不理你了吗？",
+            "我把视频录下来了，今天我等不到下午班会课，我现在就用我宝贵的英语课的时间，和大家共同分享！",
+            "回去上晚自习！",
+            "我昨天晚上翻来覆去睡不着！",
+            "天哪！我的心都要碎了。",
+            "一趟头就出来了。",
+            "这题做不出来你跟中国国家男子足球队有什么区别？",
+            "五班是以理科强大而著称的教改班。"
+        ];
+
+        function updateTeacherMessage() {
+            const messageElement = document.getElementById('teacherMessage');
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            messageElement.textContent = messages[randomIndex];
         }
 
-        // 在页面加载完成后初始化评论
-        document.addEventListener('DOMContentLoaded', initComments);
+        // 页面加载时显示随机寄语
+        document.addEventListener('DOMContentLoaded', updateTeacherMessage);
 
-        // 在切换页面内容时重新初始化评论
-        document.querySelectorAll('.nav-link').forEach(link => {
-            const existingClickHandler = link.onclick;
-            link.onclick = (e) => {
-                if (existingClickHandler) {
-                    existingClickHandler(e);
-                }
-                commentsLoaded = false; // 重置评论加载状态
-                setTimeout(initComments, 100);
-            };
-        });
+        // 每隔30秒更新一次寄语
+        setInterval(updateTeacherMessage, 30000);
     </script>
 </body>
 </html>

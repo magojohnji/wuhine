@@ -151,6 +151,20 @@ document.addEventListener('DOMContentLoaded', () => {
             closeImagePreview();
         }
     });
+
+    // 为所有导航链接添加点击事件
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            // 检查是否是移动端（屏幕宽度小于1024px）
+            if (window.innerWidth <= 1024) {
+                // 触发侧栏收起
+                const sidebar = document.querySelector('.sidebar');
+                const openButton = document.querySelector('.open-sidebar');
+                sidebar.classList.add('collapsed');
+                openButton.style.display = 'flex';
+            }
+        });
+    });
 });
 
 // 教师详情数据

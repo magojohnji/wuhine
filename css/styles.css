@@ -977,3 +977,38 @@ copyright-text img {
         margin-right: 70px;
     }
 }
+
+/* ...existing code... */
+
+.message-divider {
+    margin: 0 10px;
+    color: #666;
+}
+
+.teacher-message {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+/* 在移动设备上调整显示 */
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 1rem; /* 稍微减小站点标题大小 */
+    }
+    
+    .message-divider {
+        margin: 0 5px; /* 减小分隔符间距 */
+    }
+    
+    .teacher-message {
+        font-size: 12px; /* 稍微减小字体大小 */
+        flex: 1; /* 允许文本占据剩余空间 */
+        min-width: 0; /* 防止文本溢出 */
+        overflow: hidden; /* 隐藏溢出内容 */
+        text-overflow: ellipsis; /* 显示省略号 */
+        white-space: nowrap; /* 防止换行 */
+    }
+}
+
+/* ...existing code... */
