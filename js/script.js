@@ -342,14 +342,21 @@ const teacherDetails = {
 function showTeacherDetail(subject) {
     const detailContainer = document.getElementById('teacherDetail');
     const teacher = teacherDetails[subject];
+    const clickedDockItem = document.querySelector(`.dock-item[data-subject="${subject}"]`);
     
     if (!teacher) return;
+
+    // 如果点击的是当前激活的dock项，则关闭详情页
+    if (clickedDockItem.classList.contains('active')) {
+        closeTeacherDetail();
+        return;
+    }
 
     // 更新dock栏激活状态
     document.querySelectorAll('.dock-item').forEach(item => {
         item.classList.remove('active');
     });
-    document.querySelector(`.dock-item[data-subject="${subject}"]`).classList.add('active');
+    clickedDockItem.classList.add('active');
 
     // 动态生成详情页HTML
     const html = `
@@ -467,7 +474,7 @@ function closeTeacherDetail() {
     // 等待动画完成后隐藏
     setTimeout(() => {
         detailContainer.classList.remove('active', 'closing');
-        // 移除dock栏激活状态
+        // 移除所有dock栏激活状态
         document.querySelectorAll('.dock-item').forEach(item => {
             item.classList.remove('active');
         });
