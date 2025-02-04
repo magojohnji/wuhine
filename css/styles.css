@@ -557,19 +557,39 @@ copyright-text img {
 .teacher-detail {
     display: flex;
     position: fixed;
-    left: 250px; /* 侧边栏宽度 */
-    right: 100px; /* 为圆形dock栏留出空间 */
-    top: 60px; /* 顶栏高度 */
+    left: 250px; /* 默认侧栏展开状态 */
+    right: 100px;
+    top: 60px;
     bottom: 0;
     background: var(--bg-color);
     padding: 20px;
     overflow-y: auto;
-    transition: all 0.3s ease;
     z-index: 1000;
     opacity: 0;
     pointer-events: none;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease; /* 统一过渡效果 */
+}
+
+/* 当侧栏折叠时调整教师详情位置 */
+.sidebar.collapsed ~ .main-content .teacher-detail {
+    left: 0;
+}
+
+/* 教师详情激活状态 */
+.teacher-detail.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* 响应式布局调整 */
+@media (max-width: 1024px) {
+    .teacher-detail {
+        left: 0;
+        right: 70px;
+    }
 }
 
 .teacher-detail.active {
