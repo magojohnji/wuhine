@@ -165,6 +165,62 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 添加气泡显示逻辑
+    const tooltip = document.querySelector('.tooltip-bubble');
+    let tooltipTimeout;
+
+    function showTooltip() {
+        if (window.innerWidth <= 1024) {
+            tooltip.classList.add('show');
+            // 3秒后自动隐藏
+            tooltipTimeout = setTimeout(() => {
+                tooltip.classList.remove('show');
+            }, 3000);
+        }
+    }
+
+    function hideTooltip() {
+        tooltip.classList.remove('show');
+        if (tooltipTimeout) {
+            clearTimeout(tooltipTimeout);
+        }
+    }
+
+    // 初始化时显示气泡
+    if (window.innerWidth <= 1024) {
+        setTimeout(showTooltip, 1000); // 延迟1秒显示，等页面加载完成
+    }
+
+    // 点击侧栏按钮时隐藏气泡
+    openBtn.addEventListener('click', hideTooltip);
+
+    // 修改toggleSidebar函数
+    const originalToggleSidebar = toggleSidebar;
+    window.toggleSidebar = function() {
+        originalToggleSidebar();
+        hideTooltip();
+    };
+
+    // 在窗口大小改变时处理气泡显示
+    window.addEventListener('resize', () => {
+        const currentWidth = window.innerWidth;
+        const sidebar = document.querySelector('.sidebar');
+        const openBtn = document.querySelector('.open-sidebar');
+        const mainContent = document.querySelector('.main-content');
+
+        if (currentWidth <= 768 || currentWidth <= 1024) {  // 移动端和平板端
+            sidebar.classList.add('collapsed');
+            mainContent.classList.add('collapsed');
+            openBtn.classList.add('visible');
+            showTooltip();
+        } else {  // 桌面端
+            sidebar.classList.remove('collapsed');
+            mainContent.classList.remove('collapsed');
+            openBtn.classList.remove('visible');
+            hideTooltip();
+        }
+    });
 });
 
 // 教师详情数据

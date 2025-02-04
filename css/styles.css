@@ -1047,3 +1047,48 @@ copyright-text img {
 }
 
 /* ...existing code... */
+
+/* 气泡提示样式 */
+.tooltip-bubble {
+    position: fixed;
+    left: calc(45px + 1.5rem); /* 打开按钮宽度 + 间距 */
+    top: calc(60px + 1rem); /* 与打开按钮对齐 */
+    background: var(--card-bg);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+.tooltip-bubble::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: var(--card-bg);
+    border-left: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tooltip-bubble.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .tooltip-bubble {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ...existing code... */
