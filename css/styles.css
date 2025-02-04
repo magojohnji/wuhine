@@ -1010,13 +1010,20 @@ copyright-text img {
 
 .message-divider {
     margin: 0 10px;
-    color: #666;
+    color: var(--text-color);
+    opacity: 0.8;
 }
 
 .teacher-message {
     font-size: 14px;
-    color: #666;
+    color: var(--text-color);
+    opacity: 0.8;
     font-style: italic;
+}
+
+[data-theme="dark"] .message-divider,
+[data-theme="dark"] .teacher-message {
+    opacity: 0.9;
 }
 
 /* 在移动设备上调整显示 */
