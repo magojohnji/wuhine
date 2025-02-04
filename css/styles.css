@@ -101,8 +101,8 @@ body {
     position: fixed;
     height: calc(100vh - 60px);
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1000;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    z-index: 1010; /* 提高层级，确保在内容之上 */
     top: 60px;
     left: 0; /* 添加左侧定位 */
 }
@@ -164,22 +164,30 @@ body {
 @media (max-width: 1024px) {
     /* 平板端和移动端适配 */
     .sidebar {
-        width: 100%; /* 在小屏幕上占满宽度 */
-        max-width: 250px; /* 但最大宽度保持250px */
+        width: 250px;
         transform: translateX(-100%);
+        box-shadow: none;
     }
     
     .sidebar.collapsed {
         transform: translateX(-100%);
+        box-shadow: none;
     }
     
     .sidebar:not(.collapsed) {
         transform: translateX(0);
+        box-shadow: 2px 0 15px rgba(0,0,0,0.2); /* 增强阴影效果 */
     }
 
     .main-content {
         margin-left: 0;
         padding: 1rem;
+        transition: none; /* 移除过渡效果，不再跟随侧栏移动 */
+    }
+
+    .main-content.collapsed {
+        margin-left: 0; /* 移除margin变化 */
+        filter: none; /* 移除任何模糊效果 */
     }
 
     .teacher-detail {
