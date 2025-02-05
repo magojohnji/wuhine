@@ -580,6 +580,28 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
 
 // PDF预览函数
 async function openPdfPreview(pdfPath) {
+    // 检查当前主题
+    const isDark = document.body.dataset.theme === 'dark';
+    
+    // 添加确认弹窗，并根据主题设置样式
+    const confirmResult = await Swal.fire({
+        title: '提示',
+        text: 'PDF功能随机失效（不想修BUG），可自行下载源文件查看',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '继续查看',
+        cancelButtonText: '取消',
+        confirmButtonColor: '#d4976a',
+        cancelButtonColor: '#6c757d',
+        background: isDark ? '#363636' : '#fff',
+        color: isDark ? '#e0e0e0' : '#4a3f35'
+    });
+
+    // 如果用户取消，则不打开PDF
+    if (!confirmResult.isConfirmed) {
+        return;
+    }
+
     const modal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
     const container = document.getElementById('pdfViewer');
     container.innerHTML = '<div class="text-center my-4"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">正在加载PDF...</p></div>';
