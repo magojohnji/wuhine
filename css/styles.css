@@ -132,25 +132,7 @@ body {
 
 /* 关闭侧栏按钮样式 */
 .close-sidebar {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    width: 45px;
-    height: 45px;
-    background: var(--sidebar-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: var(--btn-color);
-    transition: all 0.3s ease-in-out;
-}
-
-.close-sidebar:hover {
-    transform: scale(1.1);
+    display: none; /* 隐藏按钮 */
 }
 
 /* 侧边栏折叠状态 */
