@@ -72,39 +72,8 @@
             // 页面加载时检测浏览器
             checkBrowser();
         </script>
-        <script>
-            // 修改页面加载进度监听
-            document.onreadystatechange = function() {
-                if (document.readyState === 'complete') {
-                    const loadingOverlay = document.getElementById('loadingOverlay');
-                    loadingOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
-                    }, 300);
-                }
-            };
-
-            // 确保在超时后也会移除加载遮罩（15秒后）
-            window.addEventListener('load', function() {
-                setTimeout(() => {
-                    const loadingOverlay = document.getElementById('loadingOverlay');
-                    if (loadingOverlay && loadingOverlay.style.display !== 'none') {
-                        loadingOverlay.style.opacity = '0';
-                        setTimeout(() => {
-                            loadingOverlay.style.display = 'none';
-                        }, 300);
-                    }
-                }, 15000); // 增加到15秒
-            });
-        </script>
     </head>
     <body>
-        <!-- 添加加载遮罩层 -->
-        <div class="loading-overlay" id="loadingOverlay">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">耐心等待一下吧 / 没钱买服务器（悲）</div>
-        </div>
-
         <!-- 修改顶栏结构 -->
         <div class="top-bar">
             <div class="left-section">
