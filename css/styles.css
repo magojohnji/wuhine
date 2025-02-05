@@ -1766,3 +1766,34 @@ copyright-text img {
 }
 
 /* ...existing code... */
+
+/* 侧栏按钮样式优化 */
+.open-sidebar {
+    /* ...existing code... */
+    color: var(--btn-color); /* 使用主题变量控制颜色 */
+    border: 1px solid var(--border-color); /* 添加边框 */
+    background-color: var(--sidebar-bg); /* 使用主题背景色 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+}
+
+.open-sidebar:hover {
+    background-color: var(--link-color);
+    color: white;
+    border-color: var(--link-color);
+    transform: scale(1.05);
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .open-sidebar {
+    color: var(--btn-color);
+    border-color: var(--border-color);
+    background-color: var(--sidebar-bg);
+}
+
+[data-theme="dark"] .open-sidebar:hover {
+    background-color: var(--link-color);
+    color: white;
+    border-color: var(--link-color);
+}
+
+/* ...existing code... */
