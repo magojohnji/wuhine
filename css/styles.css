@@ -631,6 +631,7 @@ copyright-text img {
     display: flex;
     flex-direction: column;
     gap: 8px; /* 减小间距使其更紧凑 */
+    transition: all 0.3s ease;
 }
 
 .dock-item {
@@ -670,6 +671,73 @@ copyright-text img {
     border-color: var(--link-color);
     transform: scale(1.1) translateX(-8px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* 移动端适配 - 调整dock栏位置和样式 */
+@media (max-width: 768px) {
+    .teacher-dock {
+        right: 0;
+        top: 60px; /* 顶栏高度 */
+        left: 0;
+        transform: none;
+        flex-direction: row;
+        justify-content: flex-start;
+        overflow-x: auto;
+        background: var(--sidebar-bg);
+        padding: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        gap: 6px;
+    }
+
+    /* 调整教师详情容器位置 */
+    .teacher-detail {
+        top: calc(60px + 52px); /* 顶栏 + dock栏高度 */
+        height: calc(100vh - 60px - 52px);
+        left: 0;
+        right: 0;
+    }
+
+    /* 调整dock项目样式 */
+    .dock-item {
+        flex-shrink: 0;
+        transform-origin: center;
+    }
+
+    .dock-item:hover,
+    .dock-item:active,
+    .dock-item.active {
+        transform: scale(1.05);
+    }
+
+    /* 添加滚动条样式 */
+    .teacher-dock::-webkit-scrollbar {
+        height: 3px;
+    }
+
+    .teacher-dock::-webkit-scrollbar-track {
+        background: var(--bg-color);
+    }
+
+    .teacher-dock::-webkit-scrollbar-thumb {
+        background: var(--link-color);
+        border-radius: 3px;
+    }
+
+    /* 确保主内容区域不被dock栏遮挡 */
+    .content-section {
+        margin-top: 52px;
+    }
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .teacher-dock {
+    /* ...existing code... */
+}
+
+@media (max-width: 768px) {
+    [data-theme="dark"] .teacher-dock {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
 }
 
 /* 图片预览模态框样式 */
