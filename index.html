@@ -6,16 +6,32 @@
         <title>江苏省江都中学 2024 级高一（5）班</title>
         <link rel="icon" href="image/logo.ico" type="image/x-icon">
         <link rel="shortcut icon" href="image/logo.ico" type="image/x-icon">
-        <!-- <link rel="stylesheet" href="css/element-plus.index.css"> -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="js/script.js" defer></script>
         <script src="js/bootstrap.bundle.min.js"></script>
-        <!-- <script src="js/element-plus.full.js"></script>
-        <script src="js/vue3.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
+        <style>
+            /* 自定义 SweetAlert2 暗色主题样式 */
+            [data-theme="dark"] .swal2-popup {
+                background: #363636 !important;
+                color: #e0e0e0 !important;
+            }
+            
+            [data-theme="dark"] .swal2-title,
+            [data-theme="dark"] .swal2-content {
+                color: #e0e0e0 !important;
+            }
+            
+            [data-theme="dark"] .swal2-icon.swal2-warning {
+                border-color: #e6b17f !important;
+                color: #e6b17f !important;
+            }
+        </style>
         <script>
             // 浏览器版本检测
             function checkBrowser() {
@@ -56,524 +72,493 @@
             // 页面加载时检测浏览器
             checkBrowser();
         </script>
-        <script>
-            // 修改页面加载进度监听
-            document.onreadystatechange = function() {
-                if (document.readyState === 'complete') {
-                    const loadingOverlay = document.getElementById('loadingOverlay');
-                    loadingOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
-                    }, 300);
-                }
-            };
-
-            // 确保在超时后也会移除加载遮罩（15秒后）
-            window.addEventListener('load', function() {
-                setTimeout(() => {
-                    const loadingOverlay = document.getElementById('loadingOverlay');
-                    if (loadingOverlay && loadingOverlay.style.display !== 'none') {
-                        loadingOverlay.style.opacity = '0';
-                        setTimeout(() => {
-                            loadingOverlay.style.display = 'none';
-                        }, 300);
-                    }
-                }, 15000); // 增加到15秒
-            });
-        </script>
     </head>
-<body>
-    <!-- 添加加载遮罩层 -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">正在加载页面内容...</div>
-    </div>
-
-    <!-- 添加打开侧栏按钮 -->
-    <button class="open-sidebar" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- 添加顶栏 -->
-    <div class="top-bar">
-        <div class="left-section">
-            <span class="site-title">伍班E站</span>
-            <span class="message-divider">|</span>
-            <span class="teacher-message" id="teacherMessage"></span>
-        </div>
-        <div class="right-section">
-            <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
-                <i class="fas fa-moon"></i>
-            </button>
-            <!-- 移除登录按钮 -->
-        </div>
-    </div>
-
-    <div class="sidebar">
-        <button class="close-sidebar" onclick="toggleSidebar()">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="text-center mb-4">
-            <img src="image/teacher/Haiyan_Wu.jpg" alt="吴海燕老师" class="rounded-circle mb-3" style="width: 100px;">
-            <h4>吴海燕</h4>
-            <h7>班主任</h7>
-        </div>
-        <div class="nav flex-column">
-            <a class="nav-link active" href="#class-intro" data-section="class-intro">班级简介</a>
-            <a class="nav-link" href="#moments" data-section="moments">班级活动</a>
-            <a class="nav-link" href="#class-honors" data-section="class-honors">班级荣誉</a>
-            <a class="nav-link" href="#teachers" data-section="teachers">任课教师</a>
-            <a class="nav-link" href="#class-genius" data-section="class-genius">班级神人</a>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="content-section active" id="class-intro">
-            <div class="profile-card animate-fade-in">
-                <h2>班级简介</h2>
-                <div class="text-center mb-4">
-                    <img src="image/class.jpeg" alt="班级照片" 
-                        class="img-fluid rounded mb-3 class-intro-image" 
-                        style="max-width: 800px; 
-                               box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-                               border-radius: 15px;
-                               transition: transform 0.3s ease, box-shadow 0.3s ease;
-                               cursor: pointer;"
-                        onclick="openImagePreview(this.src)"
-                        onmouseover="this.style.transform='scale(1.02)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.3)'"
-                        onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 8px 16px rgba(0,0,0,0.2)'">
-                </div>
-                <p class="lead">
-                    江苏省江都中学2024级高一（5）班是一个充满活力和创造力的集体。在吴海燕老师的带领下，全班同学团结一心，共同进步。
-                </p>
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <h3>班级特色</h3>
-                        <ul>
-                            <li>团结友爱，互帮互助</li>
-                            <li>学习氛围浓厚</li>
-                            <li>特色活动丰富多彩</li>
-                            <li>班级管理规范有序</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h3>班级目标</h3>
-                        <ul>
-                            <li>培养全面发展的人才</li>
-                            <li>打造优秀的班级文化</li>
-                            <li>创造良好的学习环境</li>
-                            <li>促进师生共同成长</li>
-                        </ul>
-                    </div>
-                </div>
+    <body>
+        <!-- 修改顶栏结构 -->
+        <div class="top-bar">
+            <div class="left-section">
+                <button class="open-sidebar" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <span class="site-title">伍班E站</span>
+                <span class="message-divider">|</span>
+                <span class="teacher-message" id="teacherMessage"></span>
+            </div>
+            <div class="right-section">
+                <button class="btn btn-outline-primary" onclick="toggleTheme()" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </div>
 
-        <div class="content-section" id="moments">
-            <div class="profile-card animate-fade-in">
-                <h2>班级活动</h2>
+        <!-- 移除原来的打开按钮 -->
+
+        <div class="tooltip-bubble">点击打开导航菜单</div>
+
+        <div class="sidebar">
+            <!-- 移除关闭按钮 -->
+            <div class="text-center mb-4">
+                <img src="image/teacher/Haiyan_Wu.jpg" alt="吴海燕老师" class="rounded-circle mb-3" style="width: 100px;">
+                <h4>吴海燕</h4>
+                <h7>班主任</h7>
+            </div>
+            <div class="nav flex-column">
+                <a class="nav-link active" href="#class-intro" data-section="class-intro">班级简介</a>
+                <a class="nav-link" href="#moments" data-section="moments">班级活动</a>
+                <a class="nav-link" href="#class-honors" data-section="class-honors">班级荣誉</a>
+                <a class="nav-link" href="#teachers" data-section="teachers">任课教师</a>
+                <a class="nav-link" href="#class-genius" data-section="class-genius">班级神人</a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="content-section active" id="class-intro">
                 <div class="profile-card animate-fade-in">
-                    <h2 class="mb-4">仪征研学</h2>
-                    <div class="activity-card" style="background-image: url('image/class.jpeg');">
-                        <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYiZheng" aria-expanded="false">
-                            展开
-                        </button>
+                    <h2>班级简介</h2>
+                    <div class="text-center mb-4">
+                        <img src="image/class.jpeg" alt="班级照片" 
+                            class="img-fluid rounded mb-3 class-intro-image" 
+                            style="max-width: 800px; 
+                                box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+                                border-radius: 15px;
+                                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                                cursor: pointer;"
+                            onclick="openImagePreview(this.src)"
+                            onmouseover="this.style.transform='scale(1.02)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.3)'"
+                            onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 8px 16px rgba(0,0,0,0.2)'">
                     </div>
-                    <div class="collapse" id="collapseYiZheng">
-                        <div class="additional-images">
-                            <img src="image/Yi-Zheng/bamboos-road.jpeg" class="img-fluid rounded mb-4" alt="课堂场景1">
-                            <img src="image/Yi-Zheng/bridge.jpeg" class="img-fluid rounded mb-4" alt="课堂场景2">
-                            <img src="image/Yi-Zheng/students.jpeg" class="img-fluid rounded mb-4" alt="课堂场景3">
+                    <p class="lead">
+                        江苏省江都中学2024级高一（5）班是一个充满活力和创造力的集体。在吴海燕老师的带领下，全班同学团结一心，共同进步。
+                    </p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h3>班级特色</h3>
+                            <ul>
+                                <li>团结友爱，互帮互助</li>
+                                <li>学习氛围浓厚</li>
+                                <li>特色活动丰富多彩</li>
+                                <li>班级管理规范有序</li>
+                            </ul>
                         </div>
-                        <div class="content">
-                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
-                                　　仪征研学活动丰富多彩，通过参观科技企业、地质公园及历史文化名镇，学生们不仅增长了见识，还深刻体验了家乡文化的魅力，增强了社会责任感与团队合作精神，活动圆满成功，收获颇丰。</p>
+                        <div class="col-md-6">
+                            <h3>班级目标</h3>
+                            <ul>
+                                <li>培养全面发展的人才</li>
+                                <li>打造优秀的班级文化</li>
+                                <li>创造良好的学习环境</li>
+                                <li>促进师生共同成长</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="content-section" id="moments">
                 <div class="profile-card animate-fade-in">
-                    <h2 class="mb-4">羽毛球比赛</h2>
-                    <div class="activity-card" style="background-image: url('image/badmintonCompetition/cheerers.jpeg');">
-                        <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBadminton" aria-expanded="false">
-                            展开
-                        </button>
-                    </div>
-                    <div class="collapse" id="collapseBadminton">
-                        <div class="additional-images">
-                            <video class="img-fluid rounded mb-4" controls>
-                                <source src="image/badmintonCompetition/video1.mp4" type="video/mp4">
-                                您的浏览器不支持视频标签。
-                            </video>
-                            <video class="img-fluid rounded mb-4" controls>
-                                <source src="image/badmintonCompetition/video2.mp4" type="video/mp4">
-                                您的浏览器不支持视频标签。
-                            </video>
-                            <video class="img-fluid rounded mb-4" controls>
-                                <source src="image/badmintonCompetition/video3.mp4" type="video/mp4">
-                                您的浏览器不支持视频标签。
-                            </video>
-                            <video class="img-fluid rounded mb-4" controls>
-                                <source src="image/badmintonCompetition/video4.mp4" type="video/mp4">
-                                您的浏览器不支持视频标签。
-                            </video>
+                    <h2>班级活动</h2>
+                    <div class="profile-card animate-fade-in">
+                        <h2 class="mb-4">仪征研学</h2>
+                        <div class="activity-card" style="background-image: url('image/class.jpeg');">
+                            <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYiZheng" aria-expanded="false">
+                                展开
+                            </button>
                         </div>
-                        <div class="content">
-                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
-                                　　羽毛球比赛中，学生们展现了高超的球技和顽强的拼搏精神，比赛气氛紧张而激烈，最终取得了优异的成绩。</p>
+                        <div class="collapse" id="collapseYiZheng">
+                            <div class="additional-images">
+                                <img src="image/Yi-Zheng/bamboos-road.jpeg" class="img-fluid rounded mb-4" alt="课堂场景1">
+                                <img src="image/Yi-Zheng/bridge.jpeg" class="img-fluid rounded mb-4" alt="课堂场景2">
+                                <img src="image/Yi-Zheng/students.jpeg" class="img-fluid rounded mb-4" alt="课堂场景3">
+                            </div>
+                            <div class="content">
+                                <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
+                                    　　仪征研学活动丰富多彩，通过参观科技企业、地质公园及历史文化名镇，学生们不仅增长了见识，还深刻体验了家乡文化的魅力，增强了社会责任感与团队合作精神，活动圆满成功，收获颇丰。</p>
+                            </div>
                         </div>
                     </div>
+                    <div class="profile-card animate-fade-in">
+                        <h2 class="mb-4">羽毛球比赛</h2>
+                        <div class="activity-card" style="background-image: url('image/badmintonCompetition/cheerers.jpeg');">
+                            <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBadminton" aria-expanded="false">
+                                展开
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseBadminton">
+                            <div class="additional-images">
+                                <video class="img-fluid rounded mb-4" controls>
+                                    <source src="image/badmintonCompetition/video1.mp4" type="video/mp4">
+                                    您的浏览器不支持视频标签。
+                                </video>
+                                <video class="img-fluid rounded mb-4" controls>
+                                    <source src="image/badmintonCompetition/video2.mp4" type="video/mp4">
+                                    您的浏览器不支持视频标签。
+                                </video>
+                                <video class="img-fluid rounded mb-4" controls>
+                                    <source src="image/badmintonCompetition/video3.mp4" type="video/mp4">
+                                    您的浏览器不支持视频标签。
+                                </video>
+                                <video class="img-fluid rounded mb-4" controls>
+                                    <source src="image/badmintonCompetition/video4.mp4" type="video/mp4">
+                                    您的浏览器不支持视频标签。
+                                </video>
+                            </div>
+                            <div class="content">
+                                <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
+                                    　　羽毛球比赛中，学生们展现了高超的球技和顽强的拼搏精神，比赛气氛紧张而激烈，最终取得了优异的成绩。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card animate-fade-in">
+                        <h2 class="mb-4">运动会</h2>
+                        <div class="activity-card" style="background-image: url('image/theSportsMeeting_12_Oct_2024/theSportsMeeting_3.jpeg');">
+                            <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSports" aria-expanded="false">
+                                展开
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseSports">
+                            <div class="additional-images">
+                                <img src="image/theSportsMeeting_12_Oct_2024/theSportsMeeting_35.jpeg" class="img-fluid rounded mb-4" alt="运动会场景1">
+                                <img src="image/theSportsMeeting_12_Oct_2024/theSportsMeeting_36.jpeg" class="img-fluid rounded mb-4" alt="运动会场景2">
+                            </div>
+                            <div class="content">
+                                <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
+                                    　　运动会期间，学生们积极参与各项比赛，展现了团结协作和奋勇拼搏的精神，活动取得了圆满成功。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card animate-fade-in">
+                        <h2 class="mb-4">元旦晚会</h2>
+                        <div class="activity-card" style="background-image: url('image/newYearParty/image/newYearsEveParty_image_2.jpeg');">
+                            <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewYear" aria-expanded="false">
+                                展开
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseNewYear">
+                            <div class="additional-images">
+                                <video class="img-fluid rounded mb-4" controls>
+                                    <source src="image/newYearParty/video/howToMakeSeaSalt.mp4" type="video/mp4">
+                                    您的浏览器不支持视频标签。
+                                </video>
+                                <video class="img-fluid rounded mb-4" controls>
+                                    <source src="image/newYearParty/video/heavyTaste.mp4" type="video/mp4">
+                                    您的浏览器不支持视频标签。
+                                </video>
+                                <video class="img-fluid rounded mb-4" controls>
+                                    <source src="image/newYearParty/video/politicsTeachersProgram.mp4" type="video/mp4">
+                                    您的浏览器不支持视频标签。
+                                </video>
+                            </div>
+                            <div class="content">
+                                <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
+                                    　　在2024年元旦晚会上，我班同学们积极参与表演，展现了丰富多彩的才艺，为全校师生献上了精彩的节目，充分展示了我班的文艺风采。</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+
+            <div class="content-section" id="class-honors">
                 <div class="profile-card animate-fade-in">
-                    <h2 class="mb-4">运动会</h2>
-                    <div class="activity-card" style="background-image: url('image/theSportsMeeting_12_Oct_2024/theSportsMeeting_3.jpeg');">
-                        <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSports" aria-expanded="false">
-                            展开
-                        </button>
-                    </div>
-                    <div class="collapse" id="collapseSports">
-                        <div class="additional-images">
-                            <img src="image/theSportsMeeting_12_Oct_2024/theSportsMeeting_35.jpeg" class="img-fluid rounded mb-4" alt="运动会场景1">
-                            <img src="image/theSportsMeeting_12_Oct_2024/theSportsMeeting_36.jpeg" class="img-fluid rounded mb-4" alt="运动会场景2">
+                    <h2>班级荣誉</h2>
+                    <div class="honors-list">
+                        <div class="honor-item">
+                            <h4>体育类</h4>
+                            <ul>
+                                <li>校运动会团体第一名</li>
+                                <li>校篮球比赛亚军</li>
+                                <li>校足球联赛季军</li>
+                            </ul>
                         </div>
-                        <div class="content">
-                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
-                                　　运动会期间，学生们积极参与各项比赛，展现了团结协作和奋勇拼搏的精神，活动取得了圆满成功。</p>
+                        <div class="honor-item">
+                            <h4>学术类</h4>
+                            <ul>
+                                <li>年级综合测评第一名</li>
+                                <li>校数学竞赛团体一等奖</li>
+                                <li>校英语演讲比赛最佳团队奖</li>
+                            </ul>
+                        </div>
+                        <div class="honor-item">
+                            <h4>文艺类</h4>
+                            <ul>
+                                <li>校园艺术节合唱比赛金奖</li>
+                                <li>校园文化节最佳组织奖</li>
+                                <li>校园书法大赛团体特等奖</li>
+                            </ul>
+                        </div>
+                        <div class="honor-item">
+                            <h4>综合类</h4>
+                            <ul>
+                                <li>校级文明班集体</li>
+                                <li>优秀班级文化建设奖</li>
+                                <li>校园卫生评比示范班级</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="content-section" id="teachers">
+                <!-- 教师详情页容器 -->
+                <div id="teacherDetail" class="teacher-detail">
+                    <!-- 详情页内容将通过JavaScript动态加载 -->
+                </div>
+
+                <!-- 教师dock栏 -->
+                <div class="teacher-dock">
+                    <div class="dock-item" data-subject="语文" onclick="showTeacherDetail('语文')">语文</div>
+                    <div class="dock-item" data-subject="数学" onclick="showTeacherDetail('数学')">数学</div>
+                    <div class="dock-item" data-subject="英语" onclick="showTeacherDetail('英语')">英语</div>
+                    <div class="dock-item" data-subject="物理" onclick="showTeacherDetail('物理')">物理</div>
+                    <div class="dock-item" data-subject="化学" onclick="showTeacherDetail('化学')">化学</div>
+                    <div class="dock-item" data-subject="政治" onclick="showTeacherDetail('政治')">政治</div>
+                    <div class="dock-item" data-subject="历史" onclick="showTeacherDetail('历史')">历史</div>
+                    <div class="dock-item" data-subject="生物" onclick="showTeacherDetail('生物')">生物</div>
+                    <div class="dock-item" data-subject="地理" onclick="showTeacherDetail('地理')">地理</div>
+                </div>
+
                 <div class="profile-card animate-fade-in">
-                    <h2 class="mb-4">元旦晚会</h2>
-                    <div class="activity-card" style="background-image: url('image/newYearParty/image/newYearsEveParty_image_2.jpeg');">
-                        <button class="btn btn-outline-light collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewYear" aria-expanded="false">
-                            展开
-                        </button>
-                    </div>
-                    <div class="collapse" id="collapseNewYear">
-                        <div class="additional-images">
-                            <video class="img-fluid rounded mb-4" controls>
-                                <source src="image/newYearParty/video/howToMakeSeaSalt.mp4" type="video/mp4">
-                                您的浏览器不支持视频标签。
-                            </video>
-                            <video class="img-fluid rounded mb-4" controls>
-                                <source src="image/newYearParty/video/heavyTaste.mp4" type="video/mp4">
-                                您的浏览器不支持视频标签。
-                            </video>
-                            <video class="img-fluid rounded mb-4" controls>
-                                <source src="image/newYearParty/video/politicsTeachersProgram.mp4" type="video/mp4">
-                                您的浏览器不支持视频标签。
-                            </video>
-                        </div>
-                        <div class="content">
-                            <p style="font-family: 'PingFang-Medium'; font-weight: 500; font-style: normal; font-display: swap; white-space: pre-wrap;">
-                                　　在2024年元旦晚会上，我班同学们积极参与表演，展现了丰富多彩的才艺，为全校师生献上了精彩的节目，充分展示了我班的文艺风采。</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="content-section" id="class-honors">
-            <div class="profile-card animate-fade-in">
-                <h2>班级荣誉</h2>
-                <div class="honors-list">
-                    <div class="honor-item">
-                        <h4>体育类</h4>
-                        <ul>
-                            <li>校运动会团体第一名</li>
-                            <li>校篮球比赛亚军</li>
-                            <li>校足球联赛季军</li>
-                        </ul>
-                    </div>
-                    <div class="honor-item">
-                        <h4>学术类</h4>
-                        <ul>
-                            <li>年级综合测评第一名</li>
-                            <li>校数学竞赛团体一等奖</li>
-                            <li>校英语演讲比赛最佳团队奖</li>
-                        </ul>
-                    </div>
-                    <div class="honor-item">
-                        <h4>文艺类</h4>
-                        <ul>
-                            <li>校园艺术节合唱比赛金奖</li>
-                            <li>校园文化节最佳组织奖</li>
-                            <li>校园书法大赛团体特等奖</li>
-                        </ul>
-                    </div>
-                    <div class="honor-item">
-                        <h4>综合类</h4>
-                        <ul>
-                            <li>校级文明班集体</li>
-                            <li>优秀班级文化建设奖</li>
-                            <li>校园卫生评比示范班级</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="content-section" id="teachers">
-            <!-- 教师详情页容器 -->
-            <div id="teacherDetail" class="teacher-detail">
-                <!-- 详情页内容将通过JavaScript动态加载 -->
-            </div>
-
-            <!-- 教师dock栏 -->
-            <div class="teacher-dock">
-                <div class="dock-item" data-subject="语文" onclick="showTeacherDetail('语文')">语文</div>
-                <div class="dock-item" data-subject="数学" onclick="showTeacherDetail('数学')">数学</div>
-                <div class="dock-item" data-subject="英语" onclick="showTeacherDetail('英语')">英语</div>
-                <div class="dock-item" data-subject="物理" onclick="showTeacherDetail('物理')">物理</div>
-                <div class="dock-item" data-subject="化学" onclick="showTeacherDetail('化学')">化学</div>
-                <div class="dock-item" data-subject="政治" onclick="showTeacherDetail('政治')">政治</div>
-                <div class="dock-item" data-subject="历史" onclick="showTeacherDetail('历史')">历史</div>
-                <div class="dock-item" data-subject="生物" onclick="showTeacherDetail('生物')">生物</div>
-                <div class="dock-item" data-subject="地理" onclick="showTeacherDetail('地理')">地理</div>
-            </div>
-
-            <div class="profile-card animate-fade-in">
-                <h2>任课教师</h2>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">语文</h4>
-                                <h5 class="teacher-name">高恒菊</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Hengju_Gao.jpg" alt="高老师" class="rounded-circle" style="width: 100px;">
+                    <h2>任课教师</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">语文</h4>
+                                    <h5 class="teacher-name">高恒菊</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Hengju_Gao.jpg" alt="高老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">擅长文学鉴赏和写作指导，致力于培养学生的语文素养和文学审美能力。</p>
                                 </div>
-                                <p class="card-text">擅长文学鉴赏和写作指导，致力于培养学生的语文素养和文学审美能力。</p>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">数学</h4>
-                                <h5 class="teacher-name">王斌</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Bin_Wang.png" alt="王老师" class="rounded-circle" style="width: 100px;">
+                        
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">数学</h4>
+                                    <h5 class="teacher-name">王斌</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Bin_Wang.png" alt="王老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">注重培养学生的数学思维和解题能力，善于用生动的例子讲解复杂的数学概念。</p>
                                 </div>
-                                <p class="card-text">注重培养学生的数学思维和解题能力，善于用生动的例子讲解复杂的数学概念。</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">英语</h4>
-                                <h5 class="teacher-name">吴海燕</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Haiyan_Wu.jpg" alt="吴老师" class="rounded-circle" style="width: 100px;">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">英语</h4>
+                                    <h5 class="teacher-name">吴海燕</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Haiyan_Wu.jpg" alt="吴老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">班主任，致力于培养学生的英语综合应用能力，创新教学方法，深受学生喜爱。</p>
                                 </div>
-                                <p class="card-text">班主任，致力于培养学生的英语综合应用能力，创新教学方法，深受学生喜爱。</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">物理</h4>
-                                <h5 class="teacher-name">单蕾</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Lei_Shan.jpg" alt="单老师" class="rounded-circle" style="width: 100px;">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">物理</h4>
+                                    <h5 class="teacher-name">单蕾</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Lei_Shan.jpg" alt="单老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">物理学硕士，毕业于东南大学物理系，泰州中学物理竞赛教练。课堂风趣幽默，擅长实验探究式教学。</p>
                                 </div>
-                                <p class="card-text">物理学硕士，毕业于东南大学物理系，泰州中学物理竞赛教练。课堂风趣幽默，擅长实验探究式教学。</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">化学</h4>
-                                <h5 class="teacher-name">赵如</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Ru_Zhao.jpg" alt="赵老师" class="rounded-circle" style="width: 100px;">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">化学</h4>
+                                    <h5 class="teacher-name">赵如</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Ru_Zhao.jpg" alt="赵老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">重视实验教学，培养学生的化学思维和实验操作能力。</p>
                                 </div>
-                                <p class="card-text">重视实验教学，培养学生的化学思维和实验操作能力。</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">政治</h4>
-                                <h5 class="teacher-name">陆朱倩</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Zhuqian_Lu.png" alt="陆老师" class="rounded-circle" style="width: 100px;">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">政治</h4>
+                                    <h5 class="teacher-name">陆朱倩</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Zhuqian_Lu.png" alt="陆老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">关注时事政治，培养学生的政治素养和批判性思维。</p>
                                 </div>
-                                <p class="card-text">关注时事政治，培养学生的政治素养和批判性思维。</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">历史</h4>
-                                <h5 class="teacher-name">褚方晨</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Fangchen_Chu.jpg" alt="褚老师" class="rounded-circle" style="width: 100px;">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">历史</h4>
+                                    <h5 class="teacher-name">褚方晨</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Fangchen_Chu.jpg" alt="褚老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">中共党员，一级教师，多次在省级教学比赛中获奖，教学经验丰富，善于创新教学方法。</p>
                                 </div>
-                                <p class="card-text">中共党员，一级教师，多次在省级教学比赛中获奖，教学经验丰富，善于创新教学方法。</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">生物</h4>
-                                <h5 class="teacher-name">樊向利</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Xiangli_Fan.jpg" alt="樊老师" class="rounded-circle" style="width: 100px;">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">生物</h4>
+                                    <h5 class="teacher-name">樊向利</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Xiangli_Fan.jpg" alt="樊老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">注重生物实验教学，培养学生的科学探究精神。</p>
                                 </div>
-                                <p class="card-text">注重生物实验教学，培养学生的科学探究精神。</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">地理</h5>
-                                <h5 class="teacher-name">刘齐</h5>
-                                <div class="text-center mb-3">
-                                    <img src="image/teacher/Qi_Liu.jpg" alt="刘老师" class="rounded-circle" style="width: 100px;">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">地理</h5>
+                                    <h5 class="teacher-name">刘齐</h5>
+                                    <div class="text-center mb-3">
+                                        <img src="image/teacher/Qi_Liu.jpg" alt="刘老师" class="rounded-circle" style="width: 100px;">
+                                    </div>
+                                    <p class="card-text">丰富的教学经验，善于引导学生理解地理规律。</p>
                                 </div>
-                                <p class="card-text">丰富的教学经验，善于引导学生理解地理规律。</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="content-section" id="class-genius">
-            <div class="profile-card animate-fade-in">
-                <h2>班级神人</h2>
-                <p>穷吾一生，阅尽奇人异事无数，余固以为初级国中之七班乃是人杰地灵，而升至高级国中后，五班亦是高手云集。</p>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">王雨轩</h5>
-                                <p class="card-text">　　锤子大王王雨轩，伟大无需多言，五班土木工程伟大事业之开端乃源于王雨轩携带其父之兵器——铁锤于五班。一代天骄，星舰小纪，只识大锤打螺丝，为及时雨吴海燕所察觉，手脚并用倒拔螺丝刀后收缴雨轩王之兵器，怎料次日白衣秀士赵谦硕舍身取回王雨轩之神器。此铁锤事变固然兵败，但其开创了五班土木工程的先河，为后文中zz携带电钻打下铺垫。</p>
+            <div class="content-section" id="class-genius">
+                <div class="profile-card animate-fade-in">
+                    <h2>班级神人</h2>
+                    <p>穷吾一生，阅尽奇人异事无数，余固以为初级国中之七班乃是人杰地灵，而升至高级国中后，五班亦是高手云集。</p>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">王雨轩</h5>
+                                    <p class="card-text">　　锤子大王王雨轩，伟大无需多言，五班土木工程伟大事业之开端乃源于王雨轩携带其父之兵器——铁锤于五班。一代天骄，星舰小纪，只识大锤打螺丝，为及时雨吴海燕所察觉，手脚并用倒拔螺丝刀后收缴雨轩王之兵器，怎料次日白衣秀士赵谦硕舍身取回王雨轩之神器。此铁锤事变固然兵败，但其开创了五班土木工程的先河，为后文中zz携带电钻打下铺垫。</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">纪行键</h5>
-                                <p class="card-text">　　扫把星大王纪星舰，代表事迹《纪提辖大锤怒敲黑旋风大腿骨》《小纪引来及时雨，吴海燕怒收赵谦硕铁锤》，江湖人称小纪罢，善于操弄各种兵器，在铁锤电钻方面颇有建树。此人所神之处在于，凡为珍宝者置于此人之手，不出一时辰必引来及时雨收缴，使锤子大王王雨轩与香烟大王赵谦硕闻风丧胆。</p>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">纪行键</h5>
+                                    <p class="card-text">　　扫把星大王纪星舰，代表事迹《纪提辖大锤怒敲黑旋风大腿骨》《小纪引来及时雨，吴海燕怒收赵谦硕铁锤》，江湖人称小纪罢，善于操弄各种兵器，在铁锤电钻方面颇有建树。此人所神之处在于，凡为珍宝者置于此人之手，不出一时辰必引来及时雨收缴，使锤子大王王雨轩与香烟大王赵谦硕闻风丧胆。</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">赵谦硕</h5>
-                                <p class="card-text">　　体育健将，擅长篮球和足球。</p>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">赵谦硕</h5>
+                                    <p class="card-text">　　体育健将，擅长篮球和足球。</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">谈颛毓</h5>
-                                <p class="card-text">　　音乐才子，擅长钢琴和吉他。</p>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">谈颛毓</h5>
+                                    <p class="card-text">　　音乐才子，擅长钢琴和吉他。</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">张哲</h5>
-                                <p class="card-text">　　绘画天才，多次在美术比赛中获奖。</p>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">张哲</h5>
+                                    <p class="card-text">　　绘画天才，多次在美术比赛中获奖。</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">韩沐垚</h5>
-                                <p class="card-text">　　韩沐垚，数学天才，擅长解答复杂的数学问题，曾在多次数学竞赛中获奖。</p>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">韩沐垚</h5>
+                                    <p class="card-text">　　韩沐垚，数学天才，擅长解答复杂的数学问题，曾在多次数学竞赛中获奖。</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">张雨泽</h5>
-                                <p class="card-text">　　张雨泽，物理天才，精通物理实验和理论，曾在全国物理竞赛中获得一等奖。</p>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">张雨泽</h5>
+                                    <p class="card-text">　　张雨泽，物理天才，精通物理实验和理论，曾在全国物理竞赛中获得一等奖。</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- 版权信息 -->
+            <div class="copyright-text">
+                <a>Copyright &copy; 高一 ⑸ 班 2025 |</a>
+                <a title="本站支持 IPv6 访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问" src="image/ipv6-certified-s1.svg"></a>
+                <a title="本站支持 SSL 安全访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问" src="image/ssl-s1.svg"></a>
+                <a>| 江苏省江都中学 | 请遵守中国法律法规</a>
+            </div>
         </div>
 
-        <!-- 版权信息 -->
-        <div class="copyright-text">
-            <a>Copyright &copy; 高一 ⑸ 班 2025 |</a>
-            <a title="本站支持 IPv6 访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问" src="image/ipv6-certified-s1.svg"></a>
-            <a title="本站支持 SSL 安全访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持SSL安全访问" src="image/ssl-s1.svg"></a>
-            <a>| 江苏省江都中学 | 请遵守中国法律法规</a>
+        <!-- 添加图片预览模态框 -->
+        <div class="image-preview-modal" id="imagePreviewModal" onclick="closeImagePreview()">
+            <span class="close-preview">&times;</span>
+            <img id="previewImage" src="" alt="预览图片">
         </div>
-    </div>
 
-    <!-- 添加图片预览模态框 -->
-    <div class="image-preview-modal" id="imagePreviewModal" onclick="closeImagePreview()">
-        <span class="close-preview">&times;</span>
-        <img id="previewImage" src="" alt="预览图片">
-    </div>
-
-    <!-- 在body末尾添加PDF预览模态框 -->
-    <div class="modal fade" id="pdfPreviewModal" tabindex="-1" aria-labelledby="pdfPreviewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pdfPreviewModalLabel">PDF预览</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="pdfViewer" style="height: 800px;"></div>
+        <!-- 在body末尾添加PDF预览模态框 -->
+        <div class="modal fade" id="pdfPreviewModal" tabindex="-1" aria-labelledby="pdfPreviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfPreviewModalLabel">PDF预览</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="pdfViewer" style="height: 800px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // 在 body 结束标签前添加以下脚本
-        const messages = [
-            "一个巴掌拍不响，你不理别人，别人不就不理你了吗？",
-            "我把视频录下来了，今天我等不到下午班会课，我现在就用我宝贵的英语课的时间，和大家共同分享！",
-            "回去上晚自习！",
-            "我昨天晚上翻来覆去睡不着！",
-            "天哪！我的心都要碎了。",
-            "一趟头就出来了。",
-            "这题做不出来你跟中国国家男子足球队有什么区别？",
-            "五班是以理科强大而著称的教改班。"
-        ];
+        <script>
+            // 在 body 结束标签前添加以下脚本
+            const messages = [
+                "一个巴掌拍不响！你不理别人，别人不就不理你了吗？",
+                "我把视频录下来了，今天我等不到下午班会课，我现在就用我宝贵的英语课的时间，和大家共同分享！",
+                "回去上晚自习！",
+                "我昨天晚上，翻来覆去睡不着！",
+                "天哪！我的心都要碎了。",
+                "一趟头就出来了。",
+                "这题做不出来你跟中国国家男子足球队有什么区别？",
+                "我讲这题，没有八次也有十次了！",
+                "五班是以理科强大而著称的教改班。"
+            ];
 
-        function updateTeacherMessage() {
-            const messageElement = document.getElementById('teacherMessage');
-            const randomIndex = Math.floor(Math.random() * messages.length);
-            messageElement.textContent = messages[randomIndex];
-        }
+            function updateTeacherMessage() {
+                const messageElement = document.getElementById('teacherMessage');
+                const randomIndex = Math.floor(Math.random() * messages.length);
+                messageElement.textContent = messages[randomIndex];
+            }
 
-        // 页面加载时显示随机寄语
-        document.addEventListener('DOMContentLoaded', updateTeacherMessage);
+            // 页面加载时显示随机寄语
+            document.addEventListener('DOMContentLoaded', updateTeacherMessage);
 
-        // 每隔30秒更新一次寄语
-        setInterval(updateTeacherMessage, 30000);
-    </script>
-</body>
+            // 每隔20秒更新一次寄语
+            setInterval(updateTeacherMessage, 20000);
+        </script>
+    </body>
 </html>

@@ -165,6 +165,62 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 添加气泡显示逻辑
+    const tooltip = document.querySelector('.tooltip-bubble');
+    let tooltipTimeout;
+
+    function showTooltip() {
+        if (window.innerWidth <= 1024) {
+            tooltip.classList.add('show');
+            // 3秒后自动隐藏
+            tooltipTimeout = setTimeout(() => {
+                tooltip.classList.remove('show');
+            }, 3000);
+        }
+    }
+
+    function hideTooltip() {
+        tooltip.classList.remove('show');
+        if (tooltipTimeout) {
+            clearTimeout(tooltipTimeout);
+        }
+    }
+
+    // 初始化时显示气泡
+    if (window.innerWidth <= 1024) {
+        setTimeout(showTooltip, 1000); // 延迟1秒显示，等页面加载完成
+    }
+
+    // 点击侧栏按钮时隐藏气泡
+    openBtn.addEventListener('click', hideTooltip);
+
+    // 修改toggleSidebar函数
+    const originalToggleSidebar = toggleSidebar;
+    window.toggleSidebar = function() {
+        originalToggleSidebar();
+        hideTooltip();
+    };
+
+    // 在窗口大小改变时处理气泡显示
+    window.addEventListener('resize', () => {
+        const currentWidth = window.innerWidth;
+        const sidebar = document.querySelector('.sidebar');
+        const openBtn = document.querySelector('.open-sidebar');
+        const mainContent = document.querySelector('.main-content');
+
+        if (currentWidth <= 768 || currentWidth <= 1024) {  // 移动端和平板端
+            sidebar.classList.add('collapsed');
+            mainContent.classList.add('collapsed');
+            openBtn.classList.add('visible');
+            showTooltip();
+        } else {  // 桌面端
+            sidebar.classList.remove('collapsed');
+            mainContent.classList.remove('collapsed');
+            openBtn.classList.remove('visible');
+            hideTooltip();
+        }
+    });
 });
 
 // 教师详情数据
@@ -342,14 +398,21 @@ const teacherDetails = {
 function showTeacherDetail(subject) {
     const detailContainer = document.getElementById('teacherDetail');
     const teacher = teacherDetails[subject];
+    const clickedDockItem = document.querySelector(`.dock-item[data-subject="${subject}"]`);
     
     if (!teacher) return;
+
+    // 如果点击的是当前激活的dock项，则关闭详情页
+    if (clickedDockItem.classList.contains('active')) {
+        closeTeacherDetail();
+        return;
+    }
 
     // 更新dock栏激活状态
     document.querySelectorAll('.dock-item').forEach(item => {
         item.classList.remove('active');
     });
-    document.querySelector(`.dock-item[data-subject="${subject}"]`).classList.add('active');
+    clickedDockItem.classList.add('active');
 
     // 动态生成详情页HTML
     const html = `
@@ -467,7 +530,7 @@ function closeTeacherDetail() {
     // 等待动画完成后隐藏
     setTimeout(() => {
         detailContainer.classList.remove('active', 'closing');
-        // 移除dock栏激活状态
+        // 移除所有dock栏激活状态
         document.querySelectorAll('.dock-item').forEach(item => {
             item.classList.remove('active');
         });
@@ -517,6 +580,28 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
 
 // PDF预览函数
 async function openPdfPreview(pdfPath) {
+    // 检查当前主题
+    const isDark = document.body.dataset.theme === 'dark';
+    
+    // 添加确认弹窗，并根据主题设置样式
+    const confirmResult = await Swal.fire({
+        title: '提示',
+        text: 'PDF功能随机失效（不想修BUG），可自行下载源文件查看',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '继续查看',
+        cancelButtonText: '取消',
+        confirmButtonColor: '#d4976a',
+        cancelButtonColor: '#6c757d',
+        background: isDark ? '#363636' : '#fff',
+        color: isDark ? '#e0e0e0' : '#4a3f35'
+    });
+
+    // 如果用户取消，则不打开PDF
+    if (!confirmResult.isConfirmed) {
+        return;
+    }
+
     const modal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
     const container = document.getElementById('pdfViewer');
     container.innerHTML = '<div class="text-center my-4"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">正在加载PDF...</p></div>';
