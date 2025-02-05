@@ -101,7 +101,6 @@ body {
     top: 60px;  /* 与顶栏底部对齐 */
     left: 0;
     height: calc(100vh - 60px);  /* 固定全屏高度减去顶栏 */
-    transform: translateY(calc(-100% + 60px));  /* 保持60px在顶栏下方 */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1001;
@@ -109,24 +108,59 @@ body {
     padding: 1rem;
 }
 
-.sidebar.collapsed {
-    transform: translateY(calc(-100% + 60px));
-}
-
-.sidebar:not(.collapsed) {
-    transform: translateY(0);
-    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 添加动画关键帧 */
-@keyframes slideDown {
-    from {
-        transform: translateY(calc(-100% + 60px));
-        opacity: 0.5;
+/* 桌面端侧栏动画 */
+@media (min-width: 769px) {
+    .sidebar {
+        transform: translateX(0);
     }
-    to {
+    
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+    }
+
+    /* 桌面端水平动画 */
+    @keyframes slideRight {
+        from {
+            transform: translateX(-100%);
+            opacity: 0.5;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .sidebar:not(.collapsed) {
+        animation: slideRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* 移动端侧栏动画 */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateY(calc(-100% + 60px));
+        width: 100%;
+    }
+    
+    .sidebar.collapsed {
+        transform: translateY(-100%);
+    }
+
+    .sidebar:not(.collapsed) {
         transform: translateY(0);
-        opacity: 1;
+        animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 保持原有的垂直动画 */
+    @keyframes slideDown {
+        from {
+            transform: translateY(calc(-100% + 60px));
+            opacity: 0.5;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 }
 
