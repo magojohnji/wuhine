@@ -105,15 +105,12 @@
             <div class="loading-text">耐心等待一下吧 / 没钱买服务器（悲）</div>
         </div>
 
-        <!-- 添加打开侧栏按钮 -->
-        <button class="open-sidebar" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="tooltip-bubble">点击打开导航菜单</div>
-
-        <!-- 添加顶栏 -->
+        <!-- 修改顶栏结构 -->
         <div class="top-bar">
             <div class="left-section">
+                <button class="open-sidebar" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <span class="site-title">伍班E站</span>
                 <span class="message-divider">|</span>
                 <span class="teacher-message" id="teacherMessage"></span>
@@ -124,6 +121,10 @@
                 </button>
             </div>
         </div>
+
+        <!-- 移除原来的打开按钮 -->
+
+        <div class="tooltip-bubble">点击打开导航菜单</div>
 
         <div class="sidebar">
             <button class="close-sidebar" onclick="toggleSidebar()">
