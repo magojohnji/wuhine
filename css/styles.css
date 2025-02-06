@@ -7,14 +7,7 @@
     font-display: swap;  /* 优化字体加载性能 */
 }
 
-/* 标题专用中等粗细字体 */
-@font-face {
-    font-family: 'PingFang-Medium';
-    src: url('../font/Pingfang-Medium-SC.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
+/* 移除 PingFang-Medium 字体定义 */
 
 body {
     display: flex;
@@ -323,9 +316,11 @@ body {
 }
 
 /* 标题特殊字体设置 */
-.profile-card .display-4 {
-    font-family: 'PingFang-Medium', 'PingFang', sans-serif;
-    font-weight: 500;
+.profile-card .display-4,
+.honor-item h4,
+.content p[style*="font-family: 'PingFang-Medium'"] {
+    font-family: 'PingFang', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-weight: 500; /* 使用数字500来设置中等粗细 */
     letter-spacing: 0.02em;
 }
 
@@ -952,7 +947,9 @@ copyright-text img {
 .honor-item h4 {
     color: var(--link-color);
     margin-bottom: 1.5rem;
-    font-family: 'PingFang-Medium', sans-serif;
+    font-family: 'PingFang', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-weight: 500; /* 使用数字500来设置中等粗细 */
+    letter-spacing: 0.02em;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--link-color);
 }
