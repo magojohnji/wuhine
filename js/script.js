@@ -270,8 +270,7 @@ const teacherDetails = {
             {title: '数学教学论文（一）', file: 'teachers/wangbin/wb1.pdf'},
             {title: '数学教学论文（二）', file: 'teachers/wangbin/wb2.pdf'},
             {title: '数学教学论文（三）', file: 'teachers/wangbin/wb3.pdf'},
-            {title: '数学教学论文（四）', file: 'teachers/wangbin/wb4.pdf'},
-            {title: '数学教学论文（五）', file: 'teachers/wangbin/wb5.pdf'}
+            {title: '数学教学论文（四）', file: 'teachers/wangbin/wb4.pdf'}
         ]
     },
     '英语': {
