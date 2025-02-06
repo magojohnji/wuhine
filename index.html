@@ -67,6 +67,13 @@
                     window.location.href = 'browser-update.html';
                     return;
                 }
+
+                // 检测 Safari 版本
+                const safariMatch = navigator.userAgent.match(/Version\/(\d+).*Safari/);
+                if (safariMatch && parseInt(safariMatch[1]) < 13) {
+                    window.location.href = 'browser-update.html';
+                    return;
+                }
             }
 
             // 页面加载时检测浏览器
