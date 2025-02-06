@@ -575,110 +575,22 @@ function closeImagePreview() {
     }, 300);
 }
 
-// 初始化PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
-
-// PDF预览函数
-async function openPdfPreview(pdfPath) {
-    // 检查当前主题
-    const isDark = document.body.dataset.theme === 'dark';
-    
-    // 添加确认弹窗，并根据主题设置样式
-    const confirmResult = await Swal.fire({
-        title: '提示',
-        text: 'PDF功能随机失效（不想修BUG），可自行下载源文件查看',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: '继续查看',
-        cancelButtonText: '取消',
-        confirmButtonColor: '#d4976a',
-        cancelButtonColor: '#6c757d',
-        background: isDark ? '#363636' : '#fff',
-        color: isDark ? '#e0e0e0' : '#4a3f35'
-    });
-
-    // 如果用户取消，则不打开PDF
-    if (!confirmResult.isConfirmed) {
-        return;
-    }
-
+// PDF预览函数（使用iframe）
+function openPdfPreview(pdfPath) {
     const modal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
     const container = document.getElementById('pdfViewer');
-    container.innerHTML = '<div class="text-center my-4"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">正在加载PDF...</p></div>';
     
-    modal.show(); // 先显示模态框和加载动画
-    
-    try {
-        // 配置PDF.js
-        const loadingTask = pdfjsLib.getDocument({
-            url: pdfPath,
-            cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
-            cMapPacked: true
-        });
+    // 清空容器
+    container.innerHTML = '';
 
-        const pdf = await loadingTask.promise;
-        
-        // 获取页面总数
-        const numPages = pdf.numPages;
-        container.innerHTML = ''; // 清空加载动画
-        
-        // 创建PDF查看器容器
-        const viewerContainer = document.createElement('div');
-        viewerContainer.className = 'pdf-viewer-container';
-        container.appendChild(viewerContainer);
-        
-        // 加载第一页
-        const page = await pdf.getPage(1);
-        
-        // 计算合适的缩放比例
-        const containerWidth = viewerContainer.clientWidth || container.clientWidth;
-        const desiredWidth = containerWidth - 30; // 留出边距
-        const scale = desiredWidth / page.getViewport({ scale: 1.0 }).width;
-        
-        // 创建canvas
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        const viewport = page.getViewport({ scale: scale });
-        
-        // 设置canvas尺寸
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        
-        // 添加样式
-        canvas.style.display = 'block';
-        canvas.style.margin = '0 auto';
-        canvas.style.maxWidth = '100%';
-        
-        viewerContainer.appendChild(canvas);
-        
-        // 渲染PDF页面
-        await page.render({
-            canvasContext: context,
-            viewport: viewport
-        }).promise;
-        
-        // 添加页码信息
-        if (numPages > 1) {
-            const pageInfo = document.createElement('div');
-            pageInfo.className = 'text-center mt-2';
-            pageInfo.textContent = `第 1 页，共 ${numPages} 页`;
-            viewerContainer.appendChild(pageInfo);
-        }
-        
-    } catch (error) {
-        console.error('PDF加载错误:', error);
-        container.innerHTML = `
-            <div class="alert alert-danger m-3" role="alert">
-                <h4 class="alert-heading">无法加载PDF</h4>
-                <p>文件加载失败，请检查以下几点：</p>
-                <ul>
-                    <li>确保网络连接正常</li>
-                    <li>检查文件路径是否正确</li>
-                    <li>刷新页面后重试</li>
-                </ul>
-                <hr>
-                <p class="mb-0">错误信息: ${error.message}</p>
-            </div>
-        `;
-    }
+    // 创建 iframe 元素
+    const iframe = document.createElement('iframe');
+    iframe.src = pdfPath;
+    iframe.style.width = '100%';
+    iframe.style.height = '800px'; // 可以调整高度
+    iframe.style.border = 'none';
+
+    // 将 iframe 添加到容器中
+    container.appendChild(iframe);
+    modal.show();
 }

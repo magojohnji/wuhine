@@ -676,6 +676,7 @@ copyright-text img {
         padding: 8px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         gap: 6px;
+        z-index: 1000; /* 确保在其他内容之上 */
     }
 
     /* 调整教师详情容器位置 */
@@ -684,9 +685,42 @@ copyright-text img {
         height: calc(100vh - 60px - 52px);
         left: 0;
         right: 0;
+        position: fixed;
+        bottom: 0;
+        height: auto;
+        max-height: calc(100vh - 60px - 52px);
+        overflow-y: auto;
+        background: var(--bg-color);
+        z-index: 999;
+        margin: 0;
+        padding: 1rem;
     }
 
-    /* 调整dock项目样式 */
+    /* 当教师详情页面打开时隐藏下方内容 */
+    .teacher-detail.active + .profile-card {
+        display: none;
+    }
+
+    /* 调整主内容区域 */
+    #teachers {
+        margin-top: 52px; /* dock栏的高度 */
+        margin-right: 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* 教师详情页面打开时的背景遮罩 */
+    .teacher-detail.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg-color);
+        z-index: -1;
+    }
+
     .dock-item {
         flex-shrink: 0;
         transform-origin: center;
@@ -863,6 +897,33 @@ copyright-text img {
 [data-theme="dark"] .teacher-detail p[style*="white-space: pre-line"] {
     background-color: #363636;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* 班级荣誉图片样式 */
+#class-honors .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#class-honors .col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#class-honors img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#class-honors img:hover {
+    transform: scale(1.05);
 }
 
 /* 班级荣誉样式 */
@@ -1742,6 +1803,220 @@ copyright-text img {
     background-color: var(--link-color);
     color: white;
     border-color: var(--link-color);
+}
+
+/* ...existing code... */
+
+/* 班级轶事样式 */
+.story-section {
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.story-section h4 {
+    color: var(--link-color);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--link-color);
+    font-family: 'PingFang-Medium', sans-serif;
+}
+
+.story-section h4:first-child {
+    margin-top: 0;
+}
+
+.story-text {
+    font-size: 1.1rem;
+    line-height: 2;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    color: var(--text-color);
+}
+
+.quotes {
+    margin-top: 2rem;
+}
+
+.quotes blockquote {
+    padding: 1rem 2rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--link-color);
+    background: rgba(0,0,0,0.05);
+    border-radius: 0 8px 8px 0;
+}
+
+[data-theme="dark"] .quotes blockquote {
+    background: rgba(255,255,255,0.05);
+}
+
+.quotes blockquote p {
+    margin: 0;
+    font-style: italic;
+    color: var(--text-color);
+}
+
+/* 修改侧栏样式 */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        max-width: none;
+        height: auto;
+        max-height: calc(100vh - 60px);
+        transform: translateY(0);  /* 修改: 初始位置不偏移 */
+        top: -100%;  /* 修改: 使用top属性控制位置 */
+        left: 0;
+        opacity: 0;
+        transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        padding: 1.5rem;
+        position: absolute;  /* 修改: 改为绝对定位 */
+    }
+
+    .sidebar.collapsed {
+        top: -100%;  /* 修改: 收起时移至顶部外 */
+        opacity: 0;
+    }
+
+    .sidebar:not(.collapsed) {
+        top: 60px;  /* 修改: 展开时位于顶栏下方 */
+        opacity: 1;
+    }
+
+    /* 移除之前的transform相关动画 */
+    @keyframes slideDown {
+        from {
+            top: -100%;
+            opacity: 0;
+        }
+        to {
+            top: 60px;
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            top: 60px;
+            opacity: 1;
+        }
+        to {
+            top: -100%;
+            opacity: 0;
+        }
+    }
+
+    /* 修改开关按钮样式 */
+    .open-sidebar {
+        width: 40px;
+        height: 40px;
+        margin-right: 1rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        transform: none !important;  /* 修改: 禁用所有transform效果 */
+    }
+
+    .open-sidebar:hover,
+    .open-sidebar:active {
+        background-color: var(--link-color);
+        color: white;
+        border-color: var(--link-color);
+        transform: none !important;  /* 修改: 禁用所有transform效果 */
+    }
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+@media (max-width: 768px) {
+    #teachers {
+        margin-right: 0; /* 移除右侧边距 */
+    }
+
+    /* 调整教师卡片容器样式 */
+    #teachers .profile-card {
+        padding: 1rem;
+        width: 100%;
+        margin: 0 auto; /* 居中显示 */
+    }
+
+    /* 调整卡片网格布局 */
+    #teachers .row {
+        margin: 0 auto;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 调整单个教师卡片列宽 */
+    #teachers .col-md-4 {
+        padding: 0.5rem;
+        width: 100%;
+        max-width: 350px; /* 限制最大宽度 */
+        margin: 0 auto;
+    }
+
+    /* 调整教师详情容器 */
+    #teachers .teacher-detail {
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        margin: 0 auto;
+    }
+
+    /* 调整教师dock栏位置 */
+    .teacher-dock {
+        right: 0;
+        width: 100%;
+        justify-content: center;
+        padding: 0.5rem;
+    }
+}
+
+/* ...existing code... */
+
+/* 修改移动端 dock 栏样式 */
+@media (max-width: 768px) {
+    .teacher-dock {
+        position: fixed;
+        right: 0;
+        left: 0;
+        bottom: 0; /* 改为固定在底部 */
+        top: auto; /* 移除顶部定位 */
+        transform: none;
+        flex-direction: row;
+        justify-content: space-around; /* 平均分配空间 */
+        overflow-x: auto;
+        background: var(--sidebar-bg);
+        padding: 8px;
+        box-shadow: 0 -2px 4px rgba(0,0,0,0.1); /* 修改阴影方向 */
+        gap: 6px;
+        z-index: 1000;
+    }
+
+    /* 调整教师详情容器 */
+    .teacher-detail {
+        bottom: 52px; /* dock栏的高度 */
+        max-height: calc(100vh - 60px - 52px); /* 考虑顶栏和dock栏高度 */
+    }
+
+    /* 调整主内容区域底部间距 */
+    .main-content {
+        padding-bottom: 60px; /* 为dock栏预留空间 */
+    }
+
+    /* 调整版权信息，防止被dock栏遮挡 */
+    .copyright-text {
+        margin-bottom: 60px;
+    }
+
+    /* 暗色模式适配 */
+    [data-theme="dark"] .teacher-dock {
+        box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
+    }
 }
 
 /* ...existing code... */
