@@ -576,21 +576,38 @@ function closeImagePreview() {
 }
 
 // PDF预览函数（使用iframe）
-function openPdfPreview(pdfPath) {
-    const modal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
-    const container = document.getElementById('pdfViewer');
-    
-    // 清空容器
-    container.innerHTML = '';
+async function openPdfPreview(pdfPath) {
+    // 使用 SweetAlert2 显示提示
+    const result = await Swal.fire({
+        title: 'PDF 预览提示',
+        text: '浏览器自身若支持则可预览；若不支持会自动下载，可自行预览',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: '继续预览',
+        cancelButtonText: '取消',
+        confirmButtonColor: '#d4976a',
+        cancelButtonColor: '#6e7881',
+        background: document.body.dataset.theme === 'dark' ? '#363636' : '#fff',
+        color: document.body.dataset.theme === 'dark' ? '#e0e0e0' : '#4a3f35'
+    });
 
-    // 创建 iframe 元素
-    const iframe = document.createElement('iframe');
-    iframe.src = pdfPath;
-    iframe.style.width = '100%';
-    iframe.style.height = '800px'; // 可以调整高度
-    iframe.style.border = 'none';
+    // 如果用户点击确认
+    if (result.isConfirmed) {
+        const modal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
+        const container = document.getElementById('pdfViewer');
+        
+        // 清空容器
+        container.innerHTML = '';
 
-    // 将 iframe 添加到容器中
-    container.appendChild(iframe);
-    modal.show();
+        // 创建 iframe 元素
+        const iframe = document.createElement('iframe');
+        iframe.src = pdfPath;
+        iframe.style.width = '100%';
+        iframe.style.height = '800px';
+        iframe.style.border = 'none';
+
+        // 将 iframe 添加到容器中
+        container.appendChild(iframe);
+        modal.show();
+    }
 }
