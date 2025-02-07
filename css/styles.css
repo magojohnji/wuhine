@@ -1854,6 +1854,78 @@ copyright-text img {
     color: var(--text-color);
 }
 
+/* 故事标题组样式 */
+.story-title-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--link-color);
+}
+
+.story-title-group h4 {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.story-toggle {
+    background: transparent;
+    border: none;
+    color: var(--link-color);
+    padding: 0.25rem 0.8rem;  /* 增加水平内边距 */
+    font-size: 0.9rem;  /* 稍微调小字号 */
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--link-color);  /* 添加边框 */
+    border-radius: 4px;  /* 添加圆角 */
+}
+
+.story-toggle:hover {
+    color: white;
+    background: var(--link-color);
+    transform: translateY(-2px);
+}
+
+/* 移除旧的图标相关样式 */
+.story-toggle i {
+    display: none;
+}
+
+.story-toggle[aria-expanded="true"] i {
+    transform: none;
+}
+
+/* 修改暗色模式下的样式 */
+[data-theme="dark"] .story-toggle {
+    color: var(--link-color);
+}
+
+[data-theme="dark"] .story-toggle:hover {
+    color: var(--link-color);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .story-title-group {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .story-title-group h4 {
+        font-size: 1.1rem;
+    }
+
+    .story-toggle {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.9rem;
+    }
+}
+
 /* 修改侧栏样式 */
 @media (max-width: 768px) {
     .sidebar {
@@ -2076,17 +2148,10 @@ copyright-text img {
 
 /* ...existing code... */
 
-<<<<<<< HEAD
 /* 晚自习认证样式优化 */
 .study-hall-section {
     margin-top: 2rem;
     padding: 1.5rem;
-=======
-/* 晚自习认证样式 */
-.study-hall-section {
-    margin-top: 3rem;
-    padding: 2rem;
->>>>>>> de04ea1902070abd1e4962e25ea7adfee5af56ba
     background: var(--card-bg);
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -2096,7 +2161,6 @@ copyright-text img {
     color: var(--link-color);
     font-size: 1.5rem;
     margin-bottom: 2rem;
-<<<<<<< HEAD
     text-align: center;
     position: relative;
 }
@@ -2122,24 +2186,11 @@ copyright-text img {
     border-radius: 12px;
     transition: transform 0.3s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-=======
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--link-color);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.study-hall-title img {
-    width: 32px;
-    height: 32px;
->>>>>>> de04ea1902070abd1e4962e25ea7adfee5af56ba
 }
 
 .students-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-<<<<<<< HEAD
     gap: 1rem;
     margin-top: 2rem;
 }
@@ -2165,32 +2216,6 @@ copyright-text img {
     color: var(--text-color);
     margin: 0;
     display: flex;
-=======
-    gap: 2rem;
-}
-
-.student-card {
-    background: rgba(255,255,255,0.1);
-    padding: 1.5rem;
-    border-radius: 12px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-}
-
-.student-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.student-name {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin: 0;
-    display: inline-flex;
->>>>>>> de04ea1902070abd1e4962e25ea7adfee5af56ba
     align-items: center;
     gap: 0.5rem;
 }
@@ -2198,7 +2223,6 @@ copyright-text img {
 .verified-badge {
     color: var(--link-color);
     font-size: 0.9rem;
-<<<<<<< HEAD
 }
 
 .study-count {
@@ -2215,7 +2239,7 @@ copyright-text img {
 
 .study-label {
     font-size: 0.9rem;
-    color: var(--text-color);
+    color: var (--text-color);
     opacity: 0.8;
 }
 
@@ -2234,46 +2258,27 @@ copyright-text img {
 }
 
 /* ...existing code... */
-=======
-    transform: translateY(-8px);
-}
 
-[data-theme="dark"] .student-card {
-    background: rgba(255,255,255,0.05);
-}
+/* ...existing code... */
 
-[data-theme="dark"] .verified-badge {
-    color: var (--link-color);
-}
+/* 统一移动端展开按钮布局 */
+@media (max-width: 768px) {
+    .story-title-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
 
-/* 晚自习认证样式修改 */
-.study-hall-section {
-    margin-top: 3rem;
-    padding: 2rem;
-    background: var(--card-bg);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    .story-toggle {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+        width: 100%; /* 让按钮占满宽度 */
+    }
+    
+    .story-title-group h4 {
+        width: 100%;
+        padding-right: 0;
+    }
 }
-
-.study-hall-title {
-    color: var(--link-color);
-    font-size: 1.5rem;
-    margin-bottom: 1rem; /* 减小底部间距 */
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--link-color);
-}
-
-.study-hall-banner {
-    width: 100%;
-    height: auto;
-    margin: 1.5rem 0 2rem;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.study-hall-banner:hover {
-    transform: scale(1.02);
-}
->>>>>>> de04ea1902070abd1e4962e25ea7adfee5af56ba
 
 /* ...existing code... */
