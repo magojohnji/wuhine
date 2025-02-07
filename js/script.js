@@ -16,6 +16,15 @@ function toggleSidebar() {
     sidebar.classList.toggle('collapsed');
     mainContent.classList.toggle('collapsed');
     openBtn.classList.toggle('visible', sidebar.classList.contains('collapsed'));
+
+    // 移动端处理滚动锁定
+    if (window.innerWidth <= 768) {
+        if (!sidebar.classList.contains('collapsed')) {
+            document.body.style.overflow = 'hidden'; // 锁定滚动
+        } else {
+            document.body.style.overflow = ''; // 恢复滚动
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,6 +75,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 section.classList.remove('active');
             });
             document.getElementById(sectionId).classList.add('active');
+
+            // 检查是否是移动端
+            if (window.innerWidth <= 768) {
+                // 关闭侧栏
+                document.querySelector('.sidebar').classList.add('collapsed');
+                // 恢复页面滚动
+                document.body.style.overflow = '';
+                // 直接滚动到顶部，不使用平滑滚动
+                window.scrollTo(0, 0);
+            }
         });
     });
 
@@ -84,6 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebar.classList.remove('collapsed');
             mainContent.classList.remove('collapsed');
             openBtn.classList.remove('visible');
+        }
+
+        // 当窗口大小变化到桌面端时，确保移除滚动锁定
+        if (currentWidth > 768) {
+            document.body.style.overflow = '';
         }
     });
 
@@ -106,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.collapse').forEach(collapseElement => {
         collapseElement.addEventListener('show.bs.collapse', event => {
             const button = document.querySelector(`[data-bs-target="#${event.target.id}"]`);
-            button.textContent = '折叠';
+            button.textContent = '收起';
         });
 
         collapseElement.addEventListener('hide.bs.collapse', event => {
@@ -219,6 +243,11 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.classList.remove('collapsed');
             openBtn.classList.remove('visible');
             hideTooltip();
+        }
+
+        // 当窗口大小变化到桌面端时，确保移除滚动锁定
+        if (currentWidth > 768) {
+            document.body.style.overflow = '';
         }
     });
 });
